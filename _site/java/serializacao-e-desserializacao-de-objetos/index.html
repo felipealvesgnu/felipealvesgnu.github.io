@@ -1,0 +1,619 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.16.4 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Serialização e Desserialização de Objetos em Java - Felipe’s blog - Software Development</title>
+<meta name="description" content="Serialização">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Felipe's blog - Software Development">
+<meta property="og:title" content="Serialização e Desserialização de Objetos em Java">
+<meta property="og:url" content="http://localhost:4000/java/serializacao-e-desserializacao-de-objetos/">
+
+
+  <meta property="og:description" content="Serialização">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2010-12-19T00:00:00-03:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/java/serializacao-e-desserializacao-de-objetos/">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Felipe A. L. Pereira",
+      "url": "http://localhost:4000",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Felipe's blog - Software Development Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">Felipe's blog - Software Development</a>
+        <ul class="visible-links"></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name"></h3>
+    
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Serialização e Desserialização de Objetos em Java">
+    <meta itemprop="description" content="Serialização">
+    <meta itemprop="datePublished" content="December 19, 2010">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Serialização e Desserialização de Objetos em Java
+</h1>
+          
+            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  3 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p><strong>Serialização</strong></p>
+
+<p>Suponhamos que você tivesse um programa, um jogo com uma aventura fictícia que precisasse de mais de uma sessão para ser concluído. Conforme o jogo progride, os personagens ficammais fortes, fracos, inteligentes, etc. E coletam e usam (e perdem armas). Você não quer iniciar do zero sempre que iniciar o jogo ? Portanto precisa de uma maneira de salvar o estado dos personagens e uma maneira de restaurá-lo quando voltar ao jogo.</p>
+
+<ol>
+  <li>Opção
+    <ul>
+      <li>Grave os objetos serializados dos personagens em um arquivo.</li>
+    </ul>
+  </li>
+  <li>Opção
+    <ul>
+      <li>Grave um arquivo de texto simples.</li>
+    </ul>
+  </li>
+</ol>
+
+<p><strong>Gravando um objeto serializado em um arquivo</strong></p>
+
+<p>Aqui estão as etapas para serializarmos (salvarmos) um objeto.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//1 - Crie um objeto FileOutputStream</span>
+ <span class="n">FileOutputStream</span> <span class="n">fileStream</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="s">"MyGame.ser"</span><span class="o">);</span>
+ <span class="c1">//2 - Crie um ObjectOutputStream</span>
+ <span class="n">ObjectOutputStream</span> <span class="n">os</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ObjectOutputStream</span><span class="o">(</span><span class="n">fileStream</span><span class="o">);</span>
+ <span class="c1">//3 - Grave os objetos</span>
+ <span class="n">os</span><span class="o">.</span><span class="na">writeObject</span><span class="o">(</span><span class="n">personagemUm</span><span class="o">);</span> <span class="c1">//Serializa os objetos referenciados por</span>
+ <span class="n">os</span><span class="o">.</span><span class="na">writeObject</span><span class="o">(</span><span class="n">personagemDois</span><span class="o">);</span><span class="c1">//personagemUm,personagemDois,personagemTres</span>
+ <span class="n">os</span><span class="o">.</span><span class="na">writeObject</span><span class="o">(</span><span class="n">personagemTres</span><span class="o">);</span> <span class="c1">//e grava no arquivo myGame.ser</span>
+ <span class="c1">//4 - Feche ObjectOutputStream</span>
+ <span class="n">os</span><span class="o">.</span><span class="na">close</span><span class="o">;</span>
+</code></pre></div></div>
+
+<p><strong>Transferência de dados do streams de um local para outro</strong></p>
+
+<p>A API de E/S Java tem streams de <strong>conexão</strong> que representam conexões com destinos e origens como arquivos ou
+soquetes de rede, stream de <strong>cadeia</strong> que só funcionam quando encadeados a outros streams.</p>
+
+<p>Geralmente, são necessários dois streams para que algo útil possa ser feito - um para representar a conexão
+e outro para chamar métodos. Pois os streams de conexão costuma estar em um nível muito baixo.
+FileOutputStream (um stream de conexão), por exemplo, tem métodos para a gravação de bytes. Mas não queremos
+gravar bytes! Queremos gravar objetos, portanto, precisamos de um stream de <em>cadeia</em> de nível mais alto. Veja descrição na figura 1.</p>
+
+<figure>
+    <a href="/assets/images/serializacao/serialization.jpg"><img src="/assets/images/serializacao/serialization.jpg" /></a>
+    <figcaption>Figura 1</figcaption>
+</figure>
+
+<p><strong>Implemente <em>Serializable</em></strong></p>
+
+<p>Serializable é considerada como uma interface <em>marcadora</em> ou de <em>tag</em>, porque não tem nenhum um método a implementar. Sua única finalidade é anunciar que a classe que está implementando pode ser serializada. Ou seja os objetos desse tipo poderão ser salvos através do mecanismo de serialização. (Se sua superclasse “FOR-UM” tipo serializable, você também  será). Segue exemplo abaixo.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.io.FileOutputStream</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.ObjectOutputStream</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.Serializable</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Box</span> <span class="kd">implements</span> <span class="n">Serializable</span> <span class="o">{</span>
+
+ <span class="kd">private</span> <span class="kt">int</span> <span class="n">largura</span><span class="o">;</span>
+ <span class="kd">private</span> <span class="kt">int</span> <span class="n">altura</span><span class="o">;</span>
+
+ <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">Box</span> <span class="n">myBox</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Box</span><span class="o">();</span>
+  <span class="n">myBox</span><span class="o">.</span><span class="na">setLargura</span><span class="o">(</span><span class="mi">50</span><span class="o">);</span>
+  <span class="n">myBox</span><span class="o">.</span><span class="na">setAltura</span><span class="o">(</span><span class="mi">20</span><span class="o">);</span>
+
+   <span class="k">try</span> <span class="o">{</span> <span class="c1">//operação de E/S pode lançar excessões.</span>
+     <span class="n">FileOutputStream</span> <span class="n">fs</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="s">"foo.ser"</span><span class="o">);</span><span class="c1">//caso não encontre cria novo arquivo chamado foo.ser</span>
+     <span class="n">ObjectOutputStream</span> <span class="n">os</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ObjectOutputStream</span><span class="o">(</span><span class="n">fs</span><span class="o">);</span> <span class="c1">//fs encadeado ao stream de conexão</span>
+     <span class="n">os</span><span class="o">.</span><span class="na">writeObject</span><span class="o">(</span><span class="n">myBox</span><span class="o">);</span>
+     <span class="n">os</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+   <span class="o">}</span><span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+     <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+   <span class="o">}</span>
+ <span class="o">}</span>
+
+ <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setLargura</span><span class="o">(</span><span class="kt">int</span> <span class="n">largura</span><span class="o">)</span> <span class="o">{</span>
+   <span class="k">this</span><span class="o">.</span><span class="na">largura</span> <span class="o">=</span> <span class="n">largura</span><span class="o">;</span>
+ <span class="o">}</span>
+
+ <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setAltura</span><span class="o">(</span><span class="kt">int</span> <span class="n">altura</span><span class="o">)</span> <span class="o">{</span>
+   <span class="k">this</span><span class="o">.</span><span class="na">altura</span> <span class="o">=</span> <span class="n">altura</span><span class="o">;</span>
+ <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><strong>Desserialização: restaurando um objeto</strong></p>
+
+<p>O objetivo da serialização de um objeto é podermos restaurá-lo a seu estado original em algum momento posterior, em uma execução diferente da JVM (que pode até ser a mesma que estava sendo executada no momento em que o objeto foi serializado). A desserialização é muito parecida com a serialização ao contrário.</p>
+
+<p>Aqui estão as etapas para desserializarmos (abrir) um objeto.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//1 - Crie um objeto FileInputStream</span>
+ <span class="n">FileInputStream</span> <span class="n">fileStream</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="s">"MyGame.ser"</span><span class="o">);</span>
+ <span class="c1">//2 - Crie um ObjectInputStream</span>
+ <span class="n">ObjectInputStream</span> <span class="n">os</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ObjectInputStream</span><span class="o">(</span><span class="n">fileStream</span><span class="o">);</span>
+ <span class="c1">//3 - Leia os objetos</span>
+ <span class="n">Object</span> <span class="n">um</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="na">readObject</span><span class="o">();</span>
+ <span class="n">Object</span> <span class="n">dois</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="na">readObject</span><span class="o">();</span>
+ <span class="n">Object</span> <span class="n">tres</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="na">readObject</span><span class="o">();</span>
+ <span class="c1">//4 - Converta os objetos</span>
+ <span class="n">GamePersonagem</span> <span class="n">duende</span><span class="err">  </span> <span class="o">=</span> <span class="o">(</span><span class="n">GamePersonagem</span><span class="o">)</span> <span class="n">um</span><span class="o">;</span>
+ <span class="n">GamePersonagem</span> <span class="n">duende_2</span> <span class="o">=</span> <span class="o">(</span><span class="n">GamePersonagem</span><span class="o">)</span> <span class="n">dois</span><span class="o">;</span>
+ <span class="n">GamePersonagem</span> <span class="n">magico</span><span class="err">  </span> <span class="o">=</span> <span class="o">(</span><span class="n">GamePersonagem</span><span class="o">)</span> <span class="n">tres</span><span class="o">;</span>
+
+ <span class="c1">//5 - Feche ObjectInputStream</span>
+ <span class="n">os</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p><strong>O que acontece durante a desserialização?</strong></p>
+
+<p>Quando um objeto é desserializado, a JVM tenta reconstituí-lo criando um novo objeto no acervo que tenha o mesmo
+estado que objeto serializado tinha na hora em que foi serializado. Exceto pelas variáveis transientes,
+que são reconstituídas com nulo(para referências de objeto) ou com valores primitivos padrão.</p>
+
+<p>Lembrando sempre que se desserialização for em um local diferente (outro sistema por exemplo)  deverá existir a cópia da classe de origem (que foi utilizada para fazer a serialização anteriormente)  para que seja feita a desserialização desse objeto que está sendo manipulado, conforme ilustra abaixo a figura 2.</p>
+
+<figure>
+    <a href="/assets/images/serializacao/desserialization.jpg"><img src="/assets/images/serializacao/desserialization.jpg" /></a>
+    <figcaption>Figura 2</figcaption>
+</figure>
+
+<p>PONTOS CHAVES</p>
+
+<ul>
+  <li>
+    <p>Uma variável de instância com a palavra-chave <code class="highlighter-rouge">transient</code> se quiser que a serialização a ignore.</p>
+  </li>
+  <li>
+    <p>Durante a desserialização, a classe de todos os objetos da ramificação deve estar disponível na JVM.</p>
+  </li>
+</ul>
+
+<p>Referências Bibliográficas</p>
+
+<p><em>SIERRA, Kathy; BATES, Bert - Use a Cabeça Java - Editora Alta Books, Rio de Janeiro, 2010.</em></p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#java" class="page__taxonomy-item" rel="tag">Java</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2010-12-19T00:00:00-03:00">December 19, 2010</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Serializa%C3%A7%C3%A3o+e+Desserializa%C3%A7%C3%A3o+de+Objetos+em+Java%20http%3A%2F%2Flocalhost%3A4000%2Fjava%2Fserializacao-e-desserializacao-de-objetos%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fjava%2Fserializacao-e-desserializacao-de-objetos%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fjava%2Fserializacao-e-desserializacao-de-objetos%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="#" class="pagination--pager disabled">Previous</a>
+    
+    
+      <a href="/java/linux/install-oracleclient-11-64-bits-no-ubuntu64-bits-12-04/" class="pagination--pager" title="Install oracle client 11 (64 bits) on ubuntu(64 bits) 12
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/intellij/java/intellij-application-context-configuration/" rel="permalink">IntelliJ - Application context configuration
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  1 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">After spending some time trying to discover why my JSF application worked on eclipse and didn’t on IntelliJ, I found a TomCat setup configuration at Run/Debu...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/java/how-to-add-a-server-runtime-library-to-a-java-ee-project-using-intellij-idea/" rel="permalink">How to add a Server Runtime Library to a Java EE project using IntelliJ IDEA
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  less than 1 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">After I have some difficult to add server libraries to the project, because in IntelliJ is a lit bit different from Eclipse, I’ve decided to post the solutio...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/java/linux/install-oracleclient-11-64-bits-no-ubuntu64-bits-12-04/" rel="permalink">Install oracle client 11 (64 bits) on ubuntu(64 bits) 12
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  2 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">I have recently faced some difficulties in installing the oracle client in ubuntu and have JBoss ‘see’ the client installation, since it is approved for RedH...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/felipealvesgnu" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/felipealves-gnu" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2019 Felipe A. L. Pereira. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.8.2/js/all.js" integrity="sha384-DJ25uNYET2XCl5ZF++U8eNxPWqcKohUUBUpKGlNLMchM7q4Wjg2CUpjHLaL8yYPH" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "http://localhost:4000/java/serializacao-e-desserializacao-de-objetos/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/java/serializacao-e-desserializacao-de-objetos"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://felipealves-gnu-github-io.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>
