@@ -3,6 +3,7 @@ author: felipealvesgnu
 date: 2014-11-13 15:23:49+00:00
 slug: how-to-add-a-server-runtime-library-to-a-java-ee-project-using-intellij-idea
 title: How to add a Server Runtime Library to a Java EE project using IntelliJ IDEA
+comments:true
 categories:
 - Java
 ---
@@ -37,3 +38,25 @@ After all of this steps your project will rebuild the project and problems relat
 Finally your project will be this way.
 
 Any problems that you have, ask me.
+
+<div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://EXAMPLE.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                            
