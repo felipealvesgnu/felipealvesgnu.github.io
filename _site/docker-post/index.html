@@ -9,38 +9,38 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>How to add a Server Runtime Library to a Java EE project using IntelliJ IDEA - Felipe’s blog - Software Development</title>
-<meta name="description" content="After I have some difficult to add server libraries to the project, because in IntelliJ is a lit bit different from Eclipse, I’ve decided to post the solution:">
+<!-- begin _includes/seo.html --><title>Docker Post - Felipe&#8217;s blog - Software Development</title>
+<meta name="description" content="First Draft">
 
 
 
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Felipe's blog - Software Development">
-<meta property="og:title" content="How to add a Server Runtime Library to a Java EE project using IntelliJ IDEA">
-<meta property="og:url" content="http://localhost:4000/java/how-to-add-a-server-runtime-library-to-a-java-ee-project-using-intellij-idea/">
+<meta property="og:title" content="Docker Post">
+<meta property="og:url" content="http://localhost:4000/docker-post/">
 
 
-  <meta property="og:description" content="After I have some difficult to add server libraries to the project, because in IntelliJ is a lit bit different from Eclipse, I’ve decided to post the solution:">
-
-
-
-
-
-
-
-  <meta property="article:published_time" content="2014-11-13T12:23:49-03:00">
+  <meta property="og:description" content="First Draft">
 
 
 
 
 
-  
+
+
+  <meta property="article:published_time" content="2019-12-28T18:31:20-04:00">
+
+
+
+
 
   
 
+  
 
-<link rel="canonical" href="http://localhost:4000/java/how-to-add-a-server-runtime-library-to-a-java-ee-project-using-intellij-idea/">
+
+<link rel="canonical" href="http://localhost:4000/docker-post/">
 
 
 
@@ -145,11 +145,23 @@
 <div itemscope itemtype="https://schema.org/Person">
 
   
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/felipe_pic.png" alt="Felipe A L Pereira" itemprop="image">
+      
+    </div>
+  
 
   <div class="author__content">
     
-      <h3 class="author__name" itemprop="name"></h3>
+      <h3 class="author__name" itemprop="name">Felipe A L Pereira</h3>
     
+    
+      <p class="author__bio" itemprop="description">
+        I am a software craftsman, passionate about creating software that will positively change the world we live in.
+      </p>
     
   </div>
 
@@ -157,7 +169,31 @@
     <button class="btn btn--inverse">Follow</button>
     <ul class="author__urls social-icons">
       
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Brazil</span>
+        </li>
+      
 
+      
+        
+          
+        
+          
+        
+          
+            <li><a href="https://twitter.com/felipealvesgnu" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/felipealvesgnu" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/felipealvesgnu" rel="nofollow noopener noreferrer"><i class="fab fa-linkedin-in" aria-hidden="true"></i> Linkedin</a></li>
+          
+        
       
 
       
@@ -224,15 +260,15 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="How to add a Server Runtime Library to a Java EE project using IntelliJ IDEA">
-    <meta itemprop="description" content="After I have some difficult to add server libraries to the project, because in IntelliJ is a lit bit different from Eclipse, I’ve decided to post the solution:">
-    <meta itemprop="datePublished" content="November 13, 2014">
+    <meta itemprop="headline" content="Docker Post">
+    <meta itemprop="description" content="First Draft">
+    <meta itemprop="datePublished" content="December 28, 2019">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">How to add a Server Runtime Library to a Java EE project using IntelliJ IDEA
+          <h1 id="page-title" class="page__title" itemprop="headline">Docker Post
 </h1>
           
             <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
@@ -248,36 +284,7 @@
 
       <section class="page__content" itemprop="text">
         
-        <p>After I have some difficult to add server libraries to the project, because in IntelliJ is a lit bit different from Eclipse, I’ve decided to post the solution:</p>
-
-<p>After the project has been opened you will need go in <strong>File</strong> -&gt; <strong>Project Structure</strong>.</p>
-
-<figure style="width: 300px" class="align-center">
-    <a href="/assets/images/intelliJ/pic_01.png"><img src="/assets/images/intelliJ/pic_01.png" /></a>
-</figure>
-
-<p>After that you’ll see the structure of project. In this way, where you need to add a dependency. In the left side column you’ll choose <strong>modules</strong> in Project Settings, choose <strong>Dependencies tab(1),</strong> to click on <strong>+</strong> in the bottom of window and select <strong>Library… (2)</strong>, like below.</p>
-
-<figure>
-    <a href="/assets/images/intelliJ/pic_02.png"><img src="/assets/images/intelliJ/pic_02.png" /></a>
-</figure>
-
-<p>When you click on <strong>Library…</strong> it will open a window asking you to select the server libraries.
-IntelliJ will show only the servers that <strong>you have added</strong> before.</p>
-
-<figure>
-    <a href="/assets/images/intelliJ/pic_03.png"><img src="/assets/images/intelliJ/pic_03.png" /></a>
-</figure>
-
-<figure style="width: 300px" class="align-right">
-    <a href="/assets/images/intelliJ/pic_04.png"><img src="/assets/images/intelliJ/pic_04.png" /></a>
-</figure>
-
-<p>After all of this steps your project will rebuild the project and problems related with compile-time should be solved.</p>
-
-<p>Finally your project will be this way.</p>
-
-<p>Any problems that you have, ask me.</p>
+        <p>First Draft</p>
 
         
       </section>
@@ -287,27 +294,8 @@ IntelliJ will show only the servers that <strong>you have added</strong> before.
         
 
 
-  
-
-
-  
-  
-  
-
-  <p class="page__taxonomy">
-    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
-    <span itemprop="keywords">
-    
-      
-      
-      <a href="/categories/#java" class="page__taxonomy-item" rel="tag">Java</a>
-    
-    </span>
-  </p>
-
-
         
-          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2014-11-13T12:23:49-03:00">November 13, 2014</time></p>
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2019-12-28T18:31:20-04:00">December 28, 2019</time></p>
         
       </footer>
 
@@ -316,23 +304,22 @@ IntelliJ will show only the servers that <strong>you have added</strong> before.
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=How+to+add+a+Server+Runtime+Library+to+a+Java+EE+project+using+IntelliJ+IDEA%20http%3A%2F%2Flocalhost%3A4000%2Fjava%2Fhow-to-add-a-server-runtime-library-to-a-java-ee-project-using-intellij-idea%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=Docker+Post%20http%3A%2F%2Flocalhost%3A4000%2Fdocker-post%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fjava%2Fhow-to-add-a-server-runtime-library-to-a-java-ee-project-using-intellij-idea%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fdocker-post%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fjava%2Fhow-to-add-a-server-runtime-library-to-a-java-ee-project-using-intellij-idea%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fdocker-post%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="/java/linux/install-oracleclient-11-64-bits-no-ubuntu64-bits-12-04/" class="pagination--pager" title="Install oracle client 11 (64 bits) on ubuntu(64 bits) 12
+      <a href="/intellij/java/intellij-application-context-configuration/" class="pagination--pager" title="IntelliJ - Application context configuration
 ">Previous</a>
     
     
-      <a href="/intellij/java/intellij-application-context-configuration/" class="pagination--pager" title="IntelliJ - Application context configuration
-">Next</a>
+      <a href="#" class="pagination--pager disabled">Next</a>
     
   </nav>
 
@@ -346,34 +333,6 @@ IntelliJ will show only the servers that <strong>you have added</strong> before.
     <div class="page__related">
       <h4 class="page__related-title">You may also enjoy</h4>
       <div class="grid__wrapper">
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/docker-post/" rel="permalink">Docker Post
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
-
-
-
-
-  less than 1 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">First Draft
-</p>
-  </article>
-</div>
-
         
           
 
@@ -398,6 +357,33 @@ IntelliJ will show only the servers that <strong>you have added</strong> before.
 </p>
     
     <p class="archive__item-excerpt" itemprop="description">After spending some time trying to discover why my JSF application worked on eclipse and didn’t on IntelliJ, I found a TomCat setup configuration at Run/Debu...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/java/how-to-add-a-server-runtime-library-to-a-java-ee-project-using-intellij-idea/" rel="permalink">How to add a Server Runtime Library to a Java EE project using IntelliJ IDEA
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  less than 1 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">After I have some difficult to add server libraries to the project, because in IntelliJ is a lit bit different from Eclipse, I’ve decided to post the solutio...</p>
   </article>
 </div>
 
@@ -530,8 +516,8 @@ IntelliJ will show only the servers that <strong>you have added</strong> before.
     
   <script>
     var disqus_config = function () {
-      this.page.url = "http://localhost:4000/java/how-to-add-a-server-runtime-library-to-a-java-ee-project-using-intellij-idea/";  // Replace PAGE_URL with your page's canonical URL variable
-      this.page.identifier = "/java/how-to-add-a-server-runtime-library-to-a-java-ee-project-using-intellij-idea"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+      this.page.url = "http://localhost:4000/docker-post/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/docker-post"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
     (function() { // DON'T EDIT BELOW THIS LINE
       var d = document, s = d.createElement('script');
