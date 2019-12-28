@@ -1,297 +1,319 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-12-28T13:42:36-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Felipe’s blog - Software Development</title><subtitle>An amazing website.</subtitle><author><name>Felipe A L Pereira</name></author><entry><title type="html">IntelliJ - Application context configuration</title><link href="http://localhost:4000/intellij/java/intellij-application-context-configuration/" rel="alternate" type="text/html" title="IntelliJ - Application context configuration" /><published>2016-11-23T11:05:04-03:00</published><updated>2016-11-23T11:05:04-03:00</updated><id>http://localhost:4000/intellij/java/intellij-application-context-configuration</id><content type="html" xml:base="http://localhost:4000/intellij/java/intellij-application-context-configuration/">&lt;p&gt;After spending some time trying to discover why my JSF application worked on eclipse and didn’t on IntelliJ, I found a TomCat setup configuration at &lt;strong&gt;Run/Debug Configurations.&lt;/strong&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-12-28T14:24:50-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Felipe’s blog - Software Development</title><subtitle>An amazing website.</subtitle><author><name>Felipe A L Pereira</name></author><entry><title type="html">IntelliJ - Application context configuration</title><link href="http://localhost:4000/intellij/java/intellij-application-context-configuration/" rel="alternate" type="text/html" title="IntelliJ - Application context configuration" /><published>2016-11-23T11:05:04-03:00</published><updated>2016-11-23T11:05:04-03:00</updated><id>http://localhost:4000/intellij/java/intellij-application-context-configuration</id><content type="html" xml:base="http://localhost:4000/intellij/java/intellij-application-context-configuration/">After spending some time trying to discover why my JSF application worked on eclipse and didn't on IntelliJ, I found a TomCat setup configuration at **Run/Debug Configurations.**
 
-&lt;p&gt;And it was like in that picture bellow:&lt;/p&gt;
-
-&lt;figure&gt;
-    &lt;a href=&quot;/assets/images/intelliJ/pic_01_context.png&quot;&gt;&lt;img src=&quot;/assets/images/intelliJ/pic_01_context.png&quot; /&gt;&lt;/a&gt;
-&lt;/figure&gt;
-
-&lt;p&gt;Without notice I was getting http status 500 error message as the pic bellow after the deployment:&lt;/p&gt;
+And it was like in that picture bellow:
 
 &lt;figure&gt;
-    &lt;a href=&quot;/assets/images/intelliJ/pic_02_context.png&quot;&gt;&lt;img src=&quot;/assets/images/intelliJ/pic_02_context.png&quot; /&gt;&lt;/a&gt;
+    &lt;a href=&quot;/assets/images/intelliJ/pic_01_context.png&quot;&gt;&lt;img src=&quot;/assets/images/intelliJ/pic_01_context.png&quot;&gt;&lt;/a&gt;
 &lt;/figure&gt;
 
-&lt;h3 id=&quot;solution&quot;&gt;&lt;strong&gt;Solution&lt;/strong&gt;&lt;/h3&gt;
 
-&lt;p&gt;After search a little I found what was missing on that configuration.&lt;/p&gt;
 
-&lt;p&gt;The context root of a web application determines which URLs Tomcat will delegate to your web application.&lt;/p&gt;
-
-&lt;p&gt;In &lt;strong&gt;Application context&lt;/strong&gt; field, you need to put the context path for your project. Generally is recommended that you specify the same context path that you chose to the Maven project. The context path can be found in the root POM file of your project as a &lt;_context-root_&gt; tag.&lt;/_context-root_&gt;&lt;/p&gt;
+Without notice I was getting http status 500 error message as the pic bellow after the deployment:
 
 &lt;figure&gt;
-    &lt;a href=&quot;/assets/images/intelliJ/pic_03_context.png&quot;&gt;&lt;img src=&quot;/assets/images/intelliJ/pic_03_context.png&quot; /&gt;&lt;/a&gt;
+    &lt;a href=&quot;/assets/images/intelliJ/pic_02_context.png&quot;&gt;&lt;img src=&quot;/assets/images/intelliJ/pic_02_context.png&quot;&gt;&lt;/a&gt;
 &lt;/figure&gt;
 
-&lt;p&gt;So the main point here is: Be aware of the application context, which defaults to “/” This means your application when deployed to the server would be available at “http://localhost:8080&lt;strong&gt;//&lt;/strong&gt;” if you want it to be deployed to another path, you need to update the value in the &lt;strong&gt;Application Context&lt;/strong&gt; field. As in my case I put the same WAR application name.&lt;/p&gt;
 
-&lt;p&gt;After that all the things are working and Mojarra found the root context as the image bellow:&lt;/p&gt;
+### **Solution**
+
+
+After search a little I found what was missing on that configuration.
+
+The context root of a web application determines which URLs Tomcat will delegate to your web application.
+
+In **Application context** field, you need to put the context path for your project. Generally is recommended that you specify the same context path that you chose to the Maven project. The context path can be found in the root POM file of your project as a &lt;_context-root_&gt; tag.
 
 &lt;figure&gt;
-    &lt;a href=&quot;/assets/images/intelliJ/pic_04_context.png&quot;&gt;&lt;img src=&quot;/assets/images/intelliJ/pic_04_context.png&quot; /&gt;&lt;/a&gt;
+    &lt;a href=&quot;/assets/images/intelliJ/pic_03_context.png&quot;&gt;&lt;img src=&quot;/assets/images/intelliJ/pic_03_context.png&quot;&gt;&lt;/a&gt;
 &lt;/figure&gt;
 
-&lt;p&gt;That’s All.&lt;/p&gt;</content><author><name>felipealvesgnu</name></author><summary type="html">After spending some time trying to discover why my JSF application worked on eclipse and didn’t on IntelliJ, I found a TomCat setup configuration at Run/Debug Configurations.</summary></entry><entry><title type="html">How to add a Server Runtime Library to a Java EE project using IntelliJ IDEA</title><link href="http://localhost:4000/java/how-to-add-a-server-runtime-library-to-a-java-ee-project-using-intellij-idea/" rel="alternate" type="text/html" title="How to add a Server Runtime Library to a Java EE project using IntelliJ IDEA" /><published>2014-11-13T12:23:49-03:00</published><updated>2014-11-13T12:23:49-03:00</updated><id>http://localhost:4000/java/how-to-add-a-server-runtime-library-to-a-java-ee-project-using-intellij-idea</id><content type="html" xml:base="http://localhost:4000/java/how-to-add-a-server-runtime-library-to-a-java-ee-project-using-intellij-idea/">&lt;p&gt;After I have some difficult to add server libraries to the project, because in IntelliJ is a lit bit different from Eclipse, I’ve decided to post the solution:&lt;/p&gt;
 
-&lt;p&gt;After the project has been opened you will need go in &lt;strong&gt;File&lt;/strong&gt; -&amp;gt; &lt;strong&gt;Project Structure&lt;/strong&gt;.&lt;/p&gt;
+
+So the main point here is: Be aware of the application context, which defaults to “/” This means your application when deployed to the server would be available at “http://localhost:8080**//**” if you want it to be deployed to another path, you need to update the value in the **Application Context** field. As in my case I put the same WAR application name.
+
+
+
+After that all the things are working and Mojarra found the root context as the image bellow:
+
+&lt;figure&gt;
+    &lt;a href=&quot;/assets/images/intelliJ/pic_04_context.png&quot;&gt;&lt;img src=&quot;/assets/images/intelliJ/pic_04_context.png&quot;&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+
+
+
+
+That's All.</content><author><name>felipealvesgnu</name></author><summary type="html">After spending some time trying to discover why my JSF application worked on eclipse and didn’t on IntelliJ, I found a TomCat setup configuration at Run/Debug Configurations.</summary></entry><entry><title type="html">How to add a Server Runtime Library to a Java EE project using IntelliJ IDEA</title><link href="http://localhost:4000/java/how-to-add-a-server-runtime-library-to-a-java-ee-project-using-intellij-idea/" rel="alternate" type="text/html" title="How to add a Server Runtime Library to a Java EE project using IntelliJ IDEA" /><published>2014-11-13T12:23:49-03:00</published><updated>2014-11-13T12:23:49-03:00</updated><id>http://localhost:4000/java/how-to-add-a-server-runtime-library-to-a-java-ee-project-using-intellij-idea</id><content type="html" xml:base="http://localhost:4000/java/how-to-add-a-server-runtime-library-to-a-java-ee-project-using-intellij-idea/">After I have some difficult to add server libraries to the project, because in IntelliJ is a lit bit different from Eclipse, I’ve decided to post the solution:
+
+After the project has been opened you will need go in **File** -&gt; **Project Structure**.
 
 &lt;figure style=&quot;width: 300px&quot; class=&quot;align-center&quot;&gt;
-    &lt;a href=&quot;/assets/images/intelliJ/pic_01.png&quot;&gt;&lt;img src=&quot;/assets/images/intelliJ/pic_01.png&quot; /&gt;&lt;/a&gt;
+    &lt;a href=&quot;/assets/images/intelliJ/pic_01.png&quot;&gt;&lt;img src=&quot;/assets/images/intelliJ/pic_01.png&quot;&gt;&lt;/a&gt;
 &lt;/figure&gt;
 
-&lt;p&gt;After that you’ll see the structure of project. In this way, where you need to add a dependency. In the left side column you’ll choose &lt;strong&gt;modules&lt;/strong&gt; in Project Settings, choose &lt;strong&gt;Dependencies tab(1),&lt;/strong&gt; to click on &lt;strong&gt;+&lt;/strong&gt; in the bottom of window and select &lt;strong&gt;Library… (2)&lt;/strong&gt;, like below.&lt;/p&gt;
+After that you’ll see the structure of project. In this way, where you need to add a dependency. In the left side column you’ll choose **modules** in Project Settings, choose **Dependencies tab(1),** to click on **+** in the bottom of window and select **Library… (2)**, like below.
 
 &lt;figure&gt;
-    &lt;a href=&quot;/assets/images/intelliJ/pic_02.png&quot;&gt;&lt;img src=&quot;/assets/images/intelliJ/pic_02.png&quot; /&gt;&lt;/a&gt;
+    &lt;a href=&quot;/assets/images/intelliJ/pic_02.png&quot;&gt;&lt;img src=&quot;/assets/images/intelliJ/pic_02.png&quot;&gt;&lt;/a&gt;
 &lt;/figure&gt;
 
-&lt;p&gt;When you click on &lt;strong&gt;Library…&lt;/strong&gt; it will open a window asking you to select the server libraries.
-IntelliJ will show only the servers that &lt;strong&gt;you have added&lt;/strong&gt; before.&lt;/p&gt;
+When you click on **Library…** it will open a window asking you to select the server libraries.
+IntelliJ will show only the servers that **you have added** before.
 
 &lt;figure&gt;
-    &lt;a href=&quot;/assets/images/intelliJ/pic_03.png&quot;&gt;&lt;img src=&quot;/assets/images/intelliJ/pic_03.png&quot; /&gt;&lt;/a&gt;
+    &lt;a href=&quot;/assets/images/intelliJ/pic_03.png&quot;&gt;&lt;img src=&quot;/assets/images/intelliJ/pic_03.png&quot;&gt;&lt;/a&gt;
 &lt;/figure&gt;
 
 &lt;figure style=&quot;width: 300px&quot; class=&quot;align-right&quot;&gt;
-    &lt;a href=&quot;/assets/images/intelliJ/pic_04.png&quot;&gt;&lt;img src=&quot;/assets/images/intelliJ/pic_04.png&quot; /&gt;&lt;/a&gt;
+    &lt;a href=&quot;/assets/images/intelliJ/pic_04.png&quot;&gt;&lt;img src=&quot;/assets/images/intelliJ/pic_04.png&quot;&gt;&lt;/a&gt;
 &lt;/figure&gt;
 
-&lt;p&gt;After all of this steps your project will rebuild the project and problems related with compile-time should be solved.&lt;/p&gt;
+After all of this steps your project will rebuild the project and problems related with compile-time should be solved.
 
-&lt;p&gt;Finally your project will be this way.&lt;/p&gt;
+Finally your project will be this way.
 
-&lt;p&gt;Any problems that you have, ask me.&lt;/p&gt;</content><author><name>felipealvesgnu</name></author><summary type="html">After I have some difficult to add server libraries to the project, because in IntelliJ is a lit bit different from Eclipse, I’ve decided to post the solution:</summary></entry><entry><title type="html">Install oracle client 11 (64 bits) on ubuntu(64 bits) 12</title><link href="http://localhost:4000/java/linux/install-oracleclient-11-64-bits-no-ubuntu64-bits-12-04/" rel="alternate" type="text/html" title="Install oracle client 11 (64 bits) on ubuntu(64 bits) 12" /><published>2012-06-29T18:41:03-04:00</published><updated>2012-06-29T18:41:03-04:00</updated><id>http://localhost:4000/java/linux/install-oracleclient-11-64-bits-no-ubuntu64-bits-12-04</id><content type="html" xml:base="http://localhost:4000/java/linux/install-oracleclient-11-64-bits-no-ubuntu64-bits-12-04/">&lt;p&gt;I have recently faced some difficulties in installing the oracle client in ubuntu and have JBoss ‘see’ the client installation, since it is approved for RedHat distributions, so I would like to share with you the settings that I, with the help of some friends of the work, I was able to make the connection with the UNICAMP - University of Campinas (where the project is located).&lt;/p&gt;
+Any problems that you have, ask me.</content><author><name>felipealvesgnu</name></author><summary type="html">After I have some difficult to add server libraries to the project, because in IntelliJ is a lit bit different from Eclipse, I’ve decided to post the solution:</summary></entry><entry><title type="html">Install oracle client 11 (64 bits) on ubuntu(64 bits) 12</title><link href="http://localhost:4000/java/linux/install-oracleclient-11-64-bits-no-ubuntu64-bits-12-04/" rel="alternate" type="text/html" title="Install oracle client 11 (64 bits) on ubuntu(64 bits) 12" /><published>2012-06-29T18:41:03-04:00</published><updated>2012-06-29T18:41:03-04:00</updated><id>http://localhost:4000/java/linux/install-oracleclient-11-64-bits-no-ubuntu64-bits-12-04</id><content type="html" xml:base="http://localhost:4000/java/linux/install-oracleclient-11-64-bits-no-ubuntu64-bits-12-04/">I have recently faced some difficulties in installing the oracle client in ubuntu and have JBoss 'see' the client installation, since it is approved for RedHat distributions, so I would like to share with you the settings that I, with the help of some friends of the work, I was able to make the connection with the UNICAMP - University of Campinas (where the project is located).
 
-&lt;p&gt;  &lt;/p&gt;
-&lt;h3 id=&quot;installing-the-jdk-and-setting-java_home&quot;&gt;Installing the JDK and setting JAVA_HOME&lt;/h3&gt;
+  
+### Installing the JDK and setting JAVA_HOME
 
-&lt;p&gt;First follow the step-by-step &lt;a href=&quot;https://askubuntu.com/a/89080/68882&quot;&gt;here&lt;/a&gt;.
-After that set the environment variables in &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/profile&lt;/code&gt; file adding the follow lines:&lt;/p&gt;
+First follow the step-by-step [here](https://askubuntu.com/a/89080/68882).
+After that set the environment variables in `/etc/profile` file adding the follow lines:
 
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;JAVA_HOME&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/usr/lib/jvm/java-6-oracle
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$PATH&lt;/span&gt;:&lt;span class=&quot;nv&quot;&gt;$JAVA_HOME&lt;/span&gt;/bin
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;h4 id=&quot;ps-now-restart-the-pc&quot;&gt;PS.: Now restart the PC&lt;/h4&gt;
+``` shell
+$ export JAVA_HOME=/usr/lib/jvm/java-6-oracle
+$ export PATH=$PATH:$JAVA_HOME/bin
+```
+#### PS.: Now restart the PC
 
-&lt;h2 id=&quot;getting-started-oracleclient-64-on-ubuntu&quot;&gt;Getting started OracleClient 64 on ubuntu&lt;/h2&gt;
 
-&lt;h3 id=&quot;step-1-downloading-the-stuff&quot;&gt;Step 1: Downloading the stuff&lt;/h3&gt;
+## Getting started OracleClient 64 on ubuntu
 
-&lt;p&gt;Go ahead and download Oracle Client 11g X64 (I’m using R1 cause I had it before, but R2 might work as well)&lt;/p&gt;
 
-&lt;p class=&quot;notice--warning&quot;&gt;&lt;strong&gt;Warning:&lt;/strong&gt; From now on, you should run all command as a root user.&lt;/p&gt;
+### Step 1: Downloading the stuff
 
-&lt;h3 id=&quot;step-2-updates&quot;&gt;Step 2: Updates&lt;/h3&gt;
+Go ahead and download Oracle Client 11g X64 (I'm using R1 cause I had it before, but R2 might work as well)
 
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;alien build-essential gawk ksh lesstif2 
+**Warning:** From now on, you should run all command as a root user. 
+{: .notice--warning}
+
+### Step 2: Updates
+
+```shell
+$ apt-get install alien build-essential gawk ksh lesstif2 
   libaio1 libaio-dev libtool expat unixodbc sysstat libxml2-dev 
   libxml2-utils zlib1g zlib1g-dev libjpeg8-dev libpng12-dev 
   libfreetype6-dev autoconf
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+```
 
-&lt;h3 id=&quot;step-3-dash-to-bash-as-dash-is-the-default-sh-and-we-need-bash&quot;&gt;Step 3: Dash to Bash (as Dash is the default sh and we need Bash):&lt;/h3&gt;
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /bin
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ln&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-sf&lt;/span&gt; bash /bin/sh
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+### Step 3: Dash to Bash (as Dash is the default sh and we need Bash):
+```shell
+$ cd /bin
+$ ln -sf bash /bin/sh
+```
 
-&lt;h3 id=&quot;step-4-creating-usergroup&quot;&gt;Step 4: Creating user/group&lt;/h3&gt;
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;adduser oracle
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;Ubuntu will create an ‘oracle’ group aswell, just type ‘oracle’ as password and leave everything blank then ur done.&lt;/p&gt;
+### Step 4: Creating user/group
+```shell
+ $ adduser oracle
+```
+Ubuntu will create an 'oracle' group aswell, just type 'oracle' as password and leave everything blank then ur done.
 
-&lt;h3 id=&quot;step-5-a-few-symlinks&quot;&gt;Step 5: A Few Symlinks&lt;/h3&gt;
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /bin
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ln&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt; /usr/bin/awk /bin/awk
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ln&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt; /usr/bin/rpm /bin/rpm
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ln&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt; /usr/bin/basename /bin/basename
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;mkdir&lt;/span&gt; /usr/lib64
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ln&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt; /usr/lib/x86_64-linux-gnu/libpthread_nonshared.a /usr/lib64/libpthread_nonshared.a
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ln&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt; /usr/lib/x86_64-linux-gnu/libc_nonshared.a /usr/lib64/libc_nonshared.a
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+### Step 5: A Few Symlinks
+```shell
+$ cd /bin
+$ ln -s /usr/bin/awk /bin/awk
+$ ln -s /usr/bin/rpm /bin/rpm
+$ ln -s /usr/bin/basename /bin/basename
+$ mkdir /usr/lib64
+$ ln -s /usr/lib/x86_64-linux-gnu/libpthread_nonshared.a /usr/lib64/libpthread_nonshared.a
+$ ln -s /usr/lib/x86_64-linux-gnu/libc_nonshared.a /usr/lib64/libc_nonshared.a
+```
 
-&lt;h3 id=&quot;step-6-create-oracle-clients-directory&quot;&gt;Step 6: Create Oracle Client’s directory&lt;/h3&gt;
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;mkdir&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; /u01/app/
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;chown&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-R&lt;/span&gt; oracle:oracle /u01
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;xhost +
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;synaptic
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+### Step 6: Create Oracle Client's directory
+```shell
+$ mkdir -p /u01/app/
+$ chown -R oracle:oracle /u01
+$ xhost +
+$ apt-get install synaptic
+```
 
-&lt;p&gt;Open &lt;strong&gt;synaptic&lt;/strong&gt;, to search **libstdc++ 5 **and install it, in some versions of Ubuntu is shipping a higher version.&lt;/p&gt;
+Open **synaptic**, to search **libstdc++ 5 **and install it, in some versions of Ubuntu is shipping a higher version.
 
-&lt;h3 id=&quot;step-7-get-ready-to-runinstaller&quot;&gt;Step 7: Get ready to runInstaller&lt;/h3&gt;
+### Step 7: Get ready to runInstaller
 
-&lt;p&gt;When you start the installation you’ll choose the “Administrator option”, because it’s a bit complete, even I need a client oracle oci connection. After that the oracle client installation will be displayed many errors, so you’ll need to run the sh scripts.&lt;/p&gt;
+When you start the installation you'll choose the “Administrator option”, because it's a bit complete, even I need a client oracle oci connection. After that the oracle client installation will be displayed many errors, so you'll need to run the sh scripts.
 
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;su oracle
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;./runInstaller
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+```shell
+$ su oracle
+$ ./runInstaller
+```
 
-&lt;h3 id=&quot;step-8-update-the-file-name-databases&quot;&gt;Step 8: Update the file name databases&lt;/h3&gt;
+### Step 8: Update the file name databases
 
-&lt;p&gt;After to run the installation and its corrections run:&lt;/p&gt;
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;updatedb
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+After to run the installation and its corrections run:
+```shell
+$ updatedb
+```
 
-&lt;h3 id=&quot;step-9-setting-environment-variables&quot;&gt;Step 9: Setting environment variables&lt;/h3&gt;
+### Step 9: Setting environment variables
 
-&lt;p class=&quot;notice--info&quot;&gt;&lt;strong&gt;Info:&lt;/strong&gt; the oracle_home is the directory where the installation was performed, check in your environment…&lt;/p&gt;
+**Info:** the oracle_home is the directory where the installation was performed, check in your environment...
+{: .notice--info}
 
-&lt;p&gt;Add the environment variables in the &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/profile&lt;/code&gt; file by adding the 2 lines below at the end of the file.&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;ORACLE_HOME&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/u01/app/oracle/product/11.2.0/client_1
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$PATH&lt;/span&gt;:&lt;span class=&quot;nv&quot;&gt;$ORACLE_HOME&lt;/span&gt;/bin
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;  &lt;/p&gt;
-&lt;h3 id=&quot;step-10-publish-libs-to-linux&quot;&gt;Step 10: Publish libs to Linux&lt;/h3&gt;
+Add the environment variables in the `/etc/profile` file by adding the 2 lines below at the end of the file.
+```bash
+$ export ORACLE_HOME=/u01/app/oracle/product/11.2.0/client_1
+$ export PATH=$PATH:$ORACLE_HOME/bin
+``` 
+  
+### Step 10: Publish libs to Linux
 
-&lt;p&gt;You should register the oracle 11g lib path in &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/ld.so.conf.d&lt;/code&gt;:
-Create a file called &lt;code class=&quot;highlighter-rouge&quot;&gt;oracle.conf&lt;/code&gt;,  inside &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/ld.so.conf.d&lt;/code&gt; directory, with this content on the first line:&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/u01/app/oracle/product/11.2.0/client_1/lib
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+You should register the oracle 11g lib path in `/etc/ld.so.conf.d`:
+Create a file called `oracle.conf`,  inside `/etc/ld.so.conf.d` directory, with this content on the first line:
+```bash
+/u01/app/oracle/product/11.2.0/client_1/lib
+```
 
-&lt;p&gt;Run the touch command:&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;touch&lt;/span&gt; /etc/ld.so.conf.d/oracle.conf
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+Run the touch command:
+```bash
+$ touch /etc/ld.so.conf.d/oracle.conf
+````
 
-&lt;p&gt;Finally&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ldconfig &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt;   &lt;span class=&quot;c&quot;&gt;#Update the links/cache &lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ldconfig &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;oracle 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;the terminal may return an alert saying that it could not find the link for a given lib, normal this ‘error’ appears)&lt;/p&gt;
+Finally
+```bash
+$ ldconfig -v   #Update the links/cache 
+$ ldconfig -p | grep oracle 
+``` 
+the terminal may return an alert saying that it could not find the link for a given lib, normal this 'error' appears)
 
-&lt;p&gt;That’s all :rocket: :rocket: :rocket:&lt;/p&gt;</content><author><name>felipealvesgnu</name></author><category term="JBoss" /><category term="oracleclient" /><category term="Ubuntu" /><summary type="html">I have recently faced some difficulties in installing the oracle client in ubuntu and have JBoss ‘see’ the client installation, since it is approved for RedHat distributions, so I would like to share with you the settings that I, with the help of some friends of the work, I was able to make the connection with the UNICAMP - University of Campinas (where the project is located).</summary></entry><entry><title type="html">Serialização e Desserialização de Objetos em Java</title><link href="http://localhost:4000/java/serializacao-e-desserializacao-de-objetos/" rel="alternate" type="text/html" title="Serialização e Desserialização de Objetos em Java" /><published>2010-12-19T00:00:00-03:00</published><updated>2010-12-19T00:00:00-03:00</updated><id>http://localhost:4000/java/serializacao-e-desserializacao-de-objetos</id><content type="html" xml:base="http://localhost:4000/java/serializacao-e-desserializacao-de-objetos/">&lt;p&gt;&lt;strong&gt;Serialização&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;Suponhamos que você tivesse um programa, um jogo com uma aventura fictícia que precisasse de mais de uma sessão para ser concluído. Conforme o jogo progride, os personagens ficammais fortes, fracos, inteligentes, etc. E coletam e usam (e perdem armas). Você não quer iniciar do zero sempre que iniciar o jogo ? Portanto precisa de uma maneira de salvar o estado dos personagens e uma maneira de restaurá-lo quando voltar ao jogo.&lt;/p&gt;
+That's all :rocket: :rocket: :rocket:</content><author><name>felipealvesgnu</name></author><category term="JBoss" /><category term="oracleclient" /><category term="Ubuntu" /><summary type="html">I have recently faced some difficulties in installing the oracle client in ubuntu and have JBoss ‘see’ the client installation, since it is approved for RedHat distributions, so I would like to share with you the settings that I, with the help of some friends of the work, I was able to make the connection with the UNICAMP - University of Campinas (where the project is located).</summary></entry><entry><title type="html">Serialização e Desserialização de Objetos em Java</title><link href="http://localhost:4000/java/serializacao-e-desserializacao-de-objetos/" rel="alternate" type="text/html" title="Serialização e Desserialização de Objetos em Java" /><published>2010-12-19T00:00:00-03:00</published><updated>2010-12-19T00:00:00-03:00</updated><id>http://localhost:4000/java/serializacao-e-desserializacao-de-objetos</id><content type="html" xml:base="http://localhost:4000/java/serializacao-e-desserializacao-de-objetos/">**Serialização**
 
-&lt;ol&gt;
-  &lt;li&gt;Opção
-    &lt;ul&gt;
-      &lt;li&gt;Grave os objetos serializados dos personagens em um arquivo.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Opção
-    &lt;ul&gt;
-      &lt;li&gt;Grave um arquivo de texto simples.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
+Suponhamos que você tivesse um programa, um jogo com uma aventura fictícia que precisasse de mais de uma sessão para ser concluído. Conforme o jogo progride, os personagens ficammais fortes, fracos, inteligentes, etc. E coletam e usam (e perdem armas). Você não quer iniciar do zero sempre que iniciar o jogo ? Portanto precisa de uma maneira de salvar o estado dos personagens e uma maneira de restaurá-lo quando voltar ao jogo.
 
-&lt;p&gt;&lt;strong&gt;Gravando um objeto serializado em um arquivo&lt;/strong&gt;&lt;/p&gt;
+1. Opção
+  * Grave os objetos serializados dos personagens em um arquivo.
 
-&lt;p&gt;Aqui estão as etapas para serializarmos (salvarmos) um objeto.&lt;/p&gt;
+2. Opção 	
+  * Grave um arquivo de texto simples.
 
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;//1 - Crie um objeto FileOutputStream&lt;/span&gt;
- &lt;span class=&quot;n&quot;&gt;FileOutputStream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fileStream&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FileOutputStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;MyGame.ser&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
- &lt;span class=&quot;c1&quot;&gt;//2 - Crie um ObjectOutputStream&lt;/span&gt;
- &lt;span class=&quot;n&quot;&gt;ObjectOutputStream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ObjectOutputStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fileStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
- &lt;span class=&quot;c1&quot;&gt;//3 - Grave os objetos&lt;/span&gt;
- &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;writeObject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;personagemUm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//Serializa os objetos referenciados por&lt;/span&gt;
- &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;writeObject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;personagemDois&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//personagemUm,personagemDois,personagemTres&lt;/span&gt;
- &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;writeObject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;personagemTres&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//e grava no arquivo myGame.ser&lt;/span&gt;
- &lt;span class=&quot;c1&quot;&gt;//4 - Feche ObjectOutputStream&lt;/span&gt;
- &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;close&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;strong&gt;Transferência de dados do streams de um local para outro&lt;/strong&gt;&lt;/p&gt;
+**Gravando um objeto serializado em um arquivo**
 
-&lt;p&gt;A API de E/S Java tem streams de &lt;strong&gt;conexão&lt;/strong&gt; que representam conexões com destinos e origens como arquivos ou
-soquetes de rede, stream de &lt;strong&gt;cadeia&lt;/strong&gt; que só funcionam quando encadeados a outros streams.&lt;/p&gt;
+Aqui estão as etapas para serializarmos (salvarmos) um objeto.
 
-&lt;p&gt;Geralmente, são necessários dois streams para que algo útil possa ser feito - um para representar a conexão
+```java
+//1 - Crie um objeto FileOutputStream
+ FileOutputStream fileStream = new FileOutputStream(&quot;MyGame.ser&quot;);
+ //2 - Crie um ObjectOutputStream
+ ObjectOutputStream os = new ObjectOutputStream(fileStream);
+ //3 - Grave os objetos
+ os.writeObject(personagemUm); //Serializa os objetos referenciados por
+ os.writeObject(personagemDois);//personagemUm,personagemDois,personagemTres
+ os.writeObject(personagemTres); //e grava no arquivo myGame.ser
+ //4 - Feche ObjectOutputStream
+ os.close;
+```
+
+**Transferência de dados do streams de um local para outro**
+
+A API de E/S Java tem streams de **conexão** que representam conexões com destinos e origens como arquivos ou
+soquetes de rede, stream de **cadeia** que só funcionam quando encadeados a outros streams.
+
+Geralmente, são necessários dois streams para que algo útil possa ser feito - um para representar a conexão
 e outro para chamar métodos. Pois os streams de conexão costuma estar em um nível muito baixo.
 FileOutputStream (um stream de conexão), por exemplo, tem métodos para a gravação de bytes. Mas não queremos
-gravar bytes! Queremos gravar objetos, portanto, precisamos de um stream de &lt;em&gt;cadeia&lt;/em&gt; de nível mais alto. Veja descrição na figura 1.&lt;/p&gt;
+gravar bytes! Queremos gravar objetos, portanto, precisamos de um stream de _cadeia_ de nível mais alto. Veja descrição na figura 1.
 
 &lt;figure&gt;
-    &lt;a href=&quot;/assets/images/serializacao/serialization.jpg&quot;&gt;&lt;img src=&quot;/assets/images/serializacao/serialization.jpg&quot; /&gt;&lt;/a&gt;
+    &lt;a href=&quot;/assets/images/serializacao/serialization.jpg&quot;&gt;&lt;img src=&quot;/assets/images/serializacao/serialization.jpg&quot;&gt;&lt;/a&gt;
     &lt;figcaption&gt;Figura 1&lt;/figcaption&gt;
 &lt;/figure&gt;
 
-&lt;p&gt;&lt;strong&gt;Implemente &lt;em&gt;Serializable&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;Serializable é considerada como uma interface &lt;em&gt;marcadora&lt;/em&gt; ou de &lt;em&gt;tag&lt;/em&gt;, porque não tem nenhum um método a implementar. Sua única finalidade é anunciar que a classe que está implementando pode ser serializada. Ou seja os objetos desse tipo poderão ser salvos através do mecanismo de serialização. (Se sua superclasse “FOR-UM” tipo serializable, você também  será). Segue exemplo abaixo.&lt;/p&gt;
+**Implemente _Serializable_**
 
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.io.FileOutputStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.io.ObjectOutputStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.io.Serializable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+Serializable é considerada como uma interface _marcadora_ ou de _tag_, porque não tem nenhum um método a implementar. Sua única finalidade é anunciar que a classe que está implementando pode ser serializada. Ou seja os objetos desse tipo poderão ser salvos através do mecanismo de serialização. (Se sua superclasse &quot;FOR-UM&quot; tipo serializable, você também  será). Segue exemplo abaixo.
 
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Box&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Serializable&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+```java
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
- &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;largura&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
- &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;altura&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+public class Box implements Serializable {
 
- &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;Box&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;myBox&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Box&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;myBox&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setLargura&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;myBox&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setAltura&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+ private int largura;
+ private int altura;
 
-   &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//operação de E/S pode lançar excessões.&lt;/span&gt;
-     &lt;span class=&quot;n&quot;&gt;FileOutputStream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FileOutputStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;foo.ser&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//caso não encontre cria novo arquivo chamado foo.ser&lt;/span&gt;
-     &lt;span class=&quot;n&quot;&gt;ObjectOutputStream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ObjectOutputStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//fs encadeado ao stream de conexão&lt;/span&gt;
-     &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;writeObject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;myBox&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-     &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;close&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-   &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-     &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;printStackTrace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-   &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
- &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+ public static void main(String[] args) {
+  Box myBox = new Box();
+  myBox.setLargura(50);
+  myBox.setAltura(20);
 
- &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setLargura&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;largura&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-   &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;largura&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;largura&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
- &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+   try { //operação de E/S pode lançar excessões.
+     FileOutputStream fs = new FileOutputStream(&quot;foo.ser&quot;);//caso não encontre cria novo arquivo chamado foo.ser
+     ObjectOutputStream os = new ObjectOutputStream(fs); //fs encadeado ao stream de conexão
+     os.writeObject(myBox);
+     os.close();
+   }catch (Exception e) {
+     e.printStackTrace();
+   }
+ }
 
- &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setAltura&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;altura&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-   &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;altura&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;altura&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
- &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+ public void setLargura(int largura) {
+   this.largura = largura;
+ }
 
-&lt;p&gt;&lt;strong&gt;Desserialização: restaurando um objeto&lt;/strong&gt;&lt;/p&gt;
+ public void setAltura(int altura) {
+   this.altura = altura;
+ }
+}
+```
 
-&lt;p&gt;O objetivo da serialização de um objeto é podermos restaurá-lo a seu estado original em algum momento posterior, em uma execução diferente da JVM (que pode até ser a mesma que estava sendo executada no momento em que o objeto foi serializado). A desserialização é muito parecida com a serialização ao contrário.&lt;/p&gt;
+**Desserialização: restaurando um objeto**
 
-&lt;p&gt;Aqui estão as etapas para desserializarmos (abrir) um objeto.&lt;/p&gt;
+O objetivo da serialização de um objeto é podermos restaurá-lo a seu estado original em algum momento posterior, em uma execução diferente da JVM (que pode até ser a mesma que estava sendo executada no momento em que o objeto foi serializado). A desserialização é muito parecida com a serialização ao contrário.
 
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;//1 - Crie um objeto FileInputStream&lt;/span&gt;
- &lt;span class=&quot;n&quot;&gt;FileInputStream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fileStream&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FileInputStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;MyGame.ser&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
- &lt;span class=&quot;c1&quot;&gt;//2 - Crie um ObjectInputStream&lt;/span&gt;
- &lt;span class=&quot;n&quot;&gt;ObjectInputStream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ObjectInputStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fileStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
- &lt;span class=&quot;c1&quot;&gt;//3 - Leia os objetos&lt;/span&gt;
- &lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;um&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;readObject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
- &lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dois&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;readObject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
- &lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tres&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;readObject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
- &lt;span class=&quot;c1&quot;&gt;//4 - Converta os objetos&lt;/span&gt;
- &lt;span class=&quot;n&quot;&gt;GamePersonagem&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;duende&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;  &lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GamePersonagem&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;um&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
- &lt;span class=&quot;n&quot;&gt;GamePersonagem&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;duende_2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GamePersonagem&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dois&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
- &lt;span class=&quot;n&quot;&gt;GamePersonagem&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;magico&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;  &lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GamePersonagem&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tres&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+Aqui estão as etapas para desserializarmos (abrir) um objeto.
 
- &lt;span class=&quot;c1&quot;&gt;//5 - Feche ObjectInputStream&lt;/span&gt;
- &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;close&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+```java
+//1 - Crie um objeto FileInputStream
+ FileInputStream fileStream = new FileInputStream(&quot;MyGame.ser&quot;);
+ //2 - Crie um ObjectInputStream
+ ObjectInputStream os = new ObjectInputStream(fileStream);
+ //3 - Leia os objetos
+ Object um = os.readObject();
+ Object dois = os.readObject();
+ Object tres = os.readObject();
+ //4 - Converta os objetos
+ GamePersonagem duende   = (GamePersonagem) um;
+ GamePersonagem duende_2 = (GamePersonagem) dois;
+ GamePersonagem magico   = (GamePersonagem) tres;
 
-&lt;p&gt;&lt;strong&gt;O que acontece durante a desserialização?&lt;/strong&gt;&lt;/p&gt;
+ //5 - Feche ObjectInputStream
+ os.close();
+````
 
-&lt;p&gt;Quando um objeto é desserializado, a JVM tenta reconstituí-lo criando um novo objeto no acervo que tenha o mesmo
+**O que acontece durante a desserialização?**
+
+Quando um objeto é desserializado, a JVM tenta reconstituí-lo criando um novo objeto no acervo que tenha o mesmo
 estado que objeto serializado tinha na hora em que foi serializado. Exceto pelas variáveis transientes,
-que são reconstituídas com nulo(para referências de objeto) ou com valores primitivos padrão.&lt;/p&gt;
+que são reconstituídas com nulo(para referências de objeto) ou com valores primitivos padrão.
 
-&lt;p&gt;Lembrando sempre que se desserialização for em um local diferente (outro sistema por exemplo)  deverá existir a cópia da classe de origem (que foi utilizada para fazer a serialização anteriormente)  para que seja feita a desserialização desse objeto que está sendo manipulado, conforme ilustra abaixo a figura 2.&lt;/p&gt;
+Lembrando sempre que se desserialização for em um local diferente (outro sistema por exemplo)  deverá existir a cópia da classe de origem (que foi utilizada para fazer a serialização anteriormente)  para que seja feita a desserialização desse objeto que está sendo manipulado, conforme ilustra abaixo a figura 2.
 
 &lt;figure&gt;
-    &lt;a href=&quot;/assets/images/serializacao/desserialization.jpg&quot;&gt;&lt;img src=&quot;/assets/images/serializacao/desserialization.jpg&quot; /&gt;&lt;/a&gt;
+    &lt;a href=&quot;/assets/images/serializacao/desserialization.jpg&quot;&gt;&lt;img src=&quot;/assets/images/serializacao/desserialization.jpg&quot;&gt;&lt;/a&gt;
     &lt;figcaption&gt;Figura 2&lt;/figcaption&gt;
 &lt;/figure&gt;
 
-&lt;p&gt;PONTOS CHAVES&lt;/p&gt;
+PONTOS CHAVES
 
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Uma variável de instância com a palavra-chave &lt;code class=&quot;highlighter-rouge&quot;&gt;transient&lt;/code&gt; se quiser que a serialização a ignore.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Durante a desserialização, a classe de todos os objetos da ramificação deve estar disponível na JVM.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
+- Uma variável de instância com a palavra-chave ```transient``` se quiser que a serialização a ignore.
 
-&lt;p&gt;Referências Bibliográficas&lt;/p&gt;
+- Durante a desserialização, a classe de todos os objetos da ramificação deve estar disponível na JVM.
 
-&lt;p&gt;&lt;em&gt;SIERRA, Kathy; BATES, Bert - Use a Cabeça Java - Editora Alta Books, Rio de Janeiro, 2010.&lt;/em&gt;&lt;/p&gt;</content><author><name>felipealvesgnu</name></author><summary type="html">Serialização</summary></entry></feed>
+Referências Bibliográficas
+
+ *SIERRA, Kathy; BATES, Bert - Use a Cabeça Java - Editora Alta Books, Rio de Janeiro, 2010.*</content><author><name>felipealvesgnu</name></author><summary type="html">Serialização</summary></entry></feed>
