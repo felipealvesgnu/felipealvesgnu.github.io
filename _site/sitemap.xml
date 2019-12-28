@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-<loc>http://localhost:4000/java/serializacao-e-desserializacao-de-objetos/</loc>
+<loc>https://felipealvesgnu.github.io/java/serializacao-e-desserializacao-de-objetos/</loc>
 <lastmod>2010-12-19T00:00:00-03:00</lastmod>
 </url>
 <url>
-<loc>http://localhost:4000/java/linux/install-oracleclient-11-64-bits-no-ubuntu64-bits-12-04/</loc>
+<loc>https://felipealvesgnu.github.io/java/linux/install-oracleclient-11-64-bits-no-ubuntu64-bits-12-04/</loc>
 <lastmod>2012-06-29T18:41:03-04:00</lastmod>
 </url>
 <url>
-<loc>http://localhost:4000/java/how-to-add-a-server-runtime-library-to-a-java-ee-project-using-intellij-idea/</loc>
+<loc>https://felipealvesgnu.github.io/java/how-to-add-a-server-runtime-library-to-a-java-ee-project-using-intellij-idea/</loc>
 <lastmod>2014-11-13T12:23:49-03:00</lastmod>
 </url>
 <url>
-<loc>http://localhost:4000/intellij/java/intellij-application-context-configuration/</loc>
+<loc>https://felipealvesgnu.github.io/intellij/java/intellij-application-context-configuration/</loc>
 <lastmod>2016-11-23T11:05:04-03:00</lastmod>
 </url>
 <url>
-<loc>http://localhost:4000/</loc>
+<loc>https://felipealvesgnu.github.io/</loc>
 </url>
 </urlset>
