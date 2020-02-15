@@ -18,9 +18,4 @@ var store = [{
         "excerpt":"After spending some time trying to discover why my JSF application worked on eclipse and didn’t on IntelliJ, I found a TomCat setup configuration at Run/Debug Configurations. And it was like in that picture bellow: Without notice I was getting http status 500 error message as the pic bellow after...","categories": ["IntelliJ","Java"],
         "tags": [],
         "url": "http://localhost:4000/intellij/java/intellij-application-context-configuration/",
-        "teaser":null},{
-        "title": "Docker Post",
-        "excerpt":"First Draft  ","categories": [],
-        "tags": [],
-        "url": "http://localhost:4000/docker-post/",
         "teaser":null}]
