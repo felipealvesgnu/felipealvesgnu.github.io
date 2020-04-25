@@ -9,38 +9,38 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>IntelliJ - Application context configuration - Felipe’s blog - Software Development</title>
-<meta name="description" content="After spending some time trying to discover why my JSF application worked on eclipse and didn’t on IntelliJ, I found a TomCat setup configuration at Run/Debug Configurations.">
+<!-- begin _includes/seo.html --><title>Docker Post - Felipe&#8217;s blog - Software Development</title>
+<meta name="description" content="First Draft">
 
 
 
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Felipe's blog - Software Development">
-<meta property="og:title" content="IntelliJ - Application context configuration">
-<meta property="og:url" content="http://localhost:4000/intellij/java/intellij-application-context-configuration/">
+<meta property="og:title" content="Docker Post">
+<meta property="og:url" content="http://localhost:4000/docker-post/">
 
 
-  <meta property="og:description" content="After spending some time trying to discover why my JSF application worked on eclipse and didn’t on IntelliJ, I found a TomCat setup configuration at Run/Debug Configurations.">
-
-
-
-
-
-
-
-  <meta property="article:published_time" content="2016-11-23T11:05:04-03:00">
+  <meta property="og:description" content="First Draft">
 
 
 
 
 
-  
+
+
+  <meta property="article:published_time" content="2019-12-31T16:35:51-04:00">
+
+
+
+
 
   
 
+  
 
-<link rel="canonical" href="http://localhost:4000/intellij/java/intellij-application-context-configuration/">
+
+<link rel="canonical" href="http://localhost:4000/docker-post/">
 
 
 
@@ -145,11 +145,23 @@
 <div itemscope itemtype="https://schema.org/Person">
 
   
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/felipe_pic.png" alt="Felipe A L Pereira" itemprop="image">
+      
+    </div>
+  
 
   <div class="author__content">
     
-      <h3 class="author__name" itemprop="name"></h3>
+      <h3 class="author__name" itemprop="name">Felipe A L Pereira</h3>
     
+    
+      <p class="author__bio" itemprop="description">
+        I am a software craftsman, passionate about creating software that will positively change the world we live in.
+      </p>
     
   </div>
 
@@ -157,7 +169,31 @@
     <button class="btn btn--inverse">Follow</button>
     <ul class="author__urls social-icons">
       
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Brazil</span>
+        </li>
+      
 
+      
+        
+          
+        
+          
+        
+          
+            <li><a href="https://twitter.com/felipealvesgnu" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/felipealvesgnu" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/felipealvesgnu" rel="nofollow noopener noreferrer"><i class="fab fa-linkedin-in" aria-hidden="true"></i> Linkedin</a></li>
+          
+        
       
 
       
@@ -224,15 +260,15 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="IntelliJ - Application context configuration">
-    <meta itemprop="description" content="After spending some time trying to discover why my JSF application worked on eclipse and didn’t on IntelliJ, I found a TomCat setup configuration at Run/Debug Configurations.">
-    <meta itemprop="datePublished" content="November 23, 2016">
+    <meta itemprop="headline" content="Docker Post">
+    <meta itemprop="description" content="First Draft">
+    <meta itemprop="datePublished" content="December 31, 2019">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">IntelliJ - Application context configuration
+          <h1 id="page-title" class="page__title" itemprop="headline">Docker Post
 </h1>
           
             <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
@@ -240,7 +276,7 @@
 
 
 
-  1 minute read
+  less than 1 minute read
 </p>
           
         </header>
@@ -248,41 +284,7 @@
 
       <section class="page__content" itemprop="text">
         
-        <p>After spending some time trying to discover why my JSF application worked on eclipse and didn’t on IntelliJ, I found a TomCat setup configuration at <strong>Run/Debug Configurations.</strong></p>
-
-<p>And it was like in that picture bellow:</p>
-
-<figure>
-    <a href="/assets/images/intelliJ/pic_01_context.png"><img src="/assets/images/intelliJ/pic_01_context.png" /></a>
-</figure>
-
-<p>Without notice I was getting http status 500 error message as the pic bellow after the deployment:</p>
-
-<figure>
-    <a href="/assets/images/intelliJ/pic_02_context.png"><img src="/assets/images/intelliJ/pic_02_context.png" /></a>
-</figure>
-
-<h3 id="solution"><strong>Solution</strong></h3>
-
-<p>After search a little I found what was missing on that configuration.</p>
-
-<p>The context root of a web application determines which URLs Tomcat will delegate to your web application.</p>
-
-<p>In <strong>Application context</strong> field, you need to put the context path for your project. Generally is recommended that you specify the same context path that you chose to the Maven project. The context path can be found in the root POM file of your project as a <_context-root_> tag.</_context-root_></p>
-
-<figure>
-    <a href="/assets/images/intelliJ/pic_03_context.png"><img src="/assets/images/intelliJ/pic_03_context.png" /></a>
-</figure>
-
-<p>So the main point here is: Be aware of the application context, which defaults to “/” This means your application when deployed to the server would be available at “http://localhost:8080<strong>//</strong>” if you want it to be deployed to another path, you need to update the value in the <strong>Application Context</strong> field. As in my case I put the same WAR application name.</p>
-
-<p>After that all the things are working and Mojarra found the root context as the image bellow:</p>
-
-<figure>
-    <a href="/assets/images/intelliJ/pic_04_context.png"><img src="/assets/images/intelliJ/pic_04_context.png" /></a>
-</figure>
-
-<p>That’s All.</p>
+        <p>First Draft</p>
 
         
       </section>
@@ -292,31 +294,8 @@
         
 
 
-  
-
-
-  
-  
-  
-
-  <p class="page__taxonomy">
-    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
-    <span itemprop="keywords">
-    
-      
-      
-      <a href="/categories/#intellij" class="page__taxonomy-item" rel="tag">IntelliJ</a><span class="sep">, </span>
-    
-      
-      
-      <a href="/categories/#java" class="page__taxonomy-item" rel="tag">Java</a>
-    
-    </span>
-  </p>
-
-
         
-          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2016-11-23T11:05:04-03:00">November 23, 2016</time></p>
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2019-12-31T16:35:51-04:00">December 31, 2019</time></p>
         
       </footer>
 
@@ -325,23 +304,22 @@
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=IntelliJ+-+Application+context+configuration%20http%3A%2F%2Flocalhost%3A4000%2Fintellij%2Fjava%2Fintellij-application-context-configuration%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=Docker+Post%20http%3A%2F%2Flocalhost%3A4000%2Fdocker-post%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fintellij%2Fjava%2Fintellij-application-context-configuration%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fdocker-post%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fintellij%2Fjava%2Fintellij-application-context-configuration%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fdocker-post%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="/java/how-to-add-a-server-runtime-library-to-a-java-ee-project-using-intellij-idea/" class="pagination--pager" title="How to add a Server Runtime Library to a Java EE project using IntelliJ IDEA
+      <a href="/intellij/java/intellij-application-context-configuration/" class="pagination--pager" title="IntelliJ - Application context configuration
 ">Previous</a>
     
     
-      <a href="/docker-post/" class="pagination--pager" title="Docker Post
-">Next</a>
+      <a href="#" class="pagination--pager disabled">Next</a>
     
   </nav>
 
@@ -365,7 +343,7 @@
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/docker-post/" rel="permalink">Docker Post
+        <a href="/intellij/java/intellij-application-context-configuration/" rel="permalink">IntelliJ - Application context configuration
 </a>
       
     </h2>
@@ -375,11 +353,10 @@
 
 
 
-  less than 1 minute read
+  1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">First Draft
-</p>
+    <p class="archive__item-excerpt" itemprop="description">After spending some time trying to discover why my JSF application worked on eclipse and didn’t on IntelliJ, I found a TomCat setup configuration at Run/Debu...</p>
   </article>
 </div>
 
@@ -539,8 +516,8 @@
     
   <script>
     var disqus_config = function () {
-      this.page.url = "http://localhost:4000/intellij/java/intellij-application-context-configuration/";  // Replace PAGE_URL with your page's canonical URL variable
-      this.page.identifier = "/intellij/java/intellij-application-context-configuration"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+      this.page.url = "http://localhost:4000/docker-post/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/docker-post"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
     (function() { // DON'T EDIT BELOW THIS LINE
       var d = document, s = d.createElement('script');
