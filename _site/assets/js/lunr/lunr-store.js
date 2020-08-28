@@ -15,7 +15,12 @@ var store = [{
         "url": "https://felipealvesgnu.github.io/java/how-to-add-a-server-runtime-library-to-a-java-ee-project-using-intellij-idea/",
         "teaser":null},{
         "title": "IntelliJ - Application context configuration",
-        "excerpt":"After2 spending some time trying to discover why my JSF application worked on eclipse and didn’t on IntelliJ, I found a TomCat setup configuration at Run/Debug Configurations. And it was like in that picture bellow: Without notice I was getting http status 500 error message as the pic bellow after...","categories": ["IntelliJ","Java"],
+        "excerpt":"After spending some time trying to discover why my JSF application worked on eclipse and didn’t on IntelliJ, I found a TomCat setup configuration at Run/Debug Configurations. And it was like in that picture bellow: Without notice I was getting http status 500 error message as the pic bellow after...","categories": ["IntelliJ","Java"],
         "tags": [],
         "url": "https://felipealvesgnu.github.io/intellij/java/intellij-application-context-configuration/",
+        "teaser":null},{
+        "title": "Gitflow",
+        "excerpt":"Este tutorial tem por objetivo facilitar o entendimento e aplicabilidade da forma como GitFlow funciona, sem enrolação e direto ao ponto: Gitflow é um projeto de fluxo de trabalho do Git que foi popularizado por Vincent Driessen. O fluxo define um modelo de ramificação estrito projetado em torno do lançamento...","categories": ["Git"],
+        "tags": [],
+        "url": "https://felipealvesgnu.github.io/git/gitflow/",
         "teaser":null}]

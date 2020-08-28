@@ -9,7 +9,7 @@ categories:
 - Java
 ---
 
-After2 spending some time trying to discover why my JSF application worked on eclipse and didn't on IntelliJ, I found a TomCat setup configuration at **Run/Debug Configurations.**
+After spending some time trying to discover why my JSF application worked on eclipse and didn't on IntelliJ, I found a TomCat setup configuration at **Run/Debug Configurations.**
 
 And it was like in that picture bellow:
 

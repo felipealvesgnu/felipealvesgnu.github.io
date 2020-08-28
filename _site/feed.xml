@@ -1,4 +1,201 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://felipealvesgnu.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://felipealvesgnu.github.io/" rel="alternate" type="text/html" /><updated>2020-08-28T13:51:11-04:00</updated><id>https://felipealvesgnu.github.io/feed.xml</id><title type="html">Felipe’s blog - Software Development</title><subtitle>An amazing website.</subtitle><author><name>Felipe A L Pereira</name></author><entry><title type="html">IntelliJ - Application context configuration</title><link href="https://felipealvesgnu.github.io/intellij/java/intellij-application-context-configuration/" rel="alternate" type="text/html" title="IntelliJ - Application context configuration" /><published>2016-11-23T11:05:04-03:00</published><updated>2016-11-23T11:05:04-03:00</updated><id>https://felipealvesgnu.github.io/intellij/java/intellij-application-context-configuration</id><content type="html" xml:base="https://felipealvesgnu.github.io/intellij/java/intellij-application-context-configuration/">&lt;p&gt;After2 spending some time trying to discover why my JSF application worked on eclipse and didn’t on IntelliJ, I found a TomCat setup configuration at &lt;strong&gt;Run/Debug Configurations.&lt;/strong&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://felipealvesgnu.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://felipealvesgnu.github.io/" rel="alternate" type="text/html" /><updated>2020-08-28T17:33:54-04:00</updated><id>https://felipealvesgnu.github.io/feed.xml</id><title type="html">Felipe’s blog - Software Development</title><subtitle>An amazing website.</subtitle><author><name>Felipe A L Pereira</name></author><entry><title type="html">Gitflow</title><link href="https://felipealvesgnu.github.io/git/gitflow/" rel="alternate" type="text/html" title="Gitflow" /><published>2020-08-28T11:23:49-04:00</published><updated>2020-08-28T11:23:49-04:00</updated><id>https://felipealvesgnu.github.io/git/gitflow</id><content type="html" xml:base="https://felipealvesgnu.github.io/git/gitflow/">&lt;p&gt;Este tutorial tem por objetivo facilitar o entendimento e aplicabilidade da forma como GitFlow funciona, sem enrolação e direto ao ponto:&lt;/p&gt;
+
+&lt;p&gt;Gitflow é um projeto de fluxo de trabalho do Git que foi popularizado por Vincent Driessen. 
+O fluxo define um modelo de ramificação estrito projetado em torno do lançamento e a publicaçāo do projeto.
+A imagem abaixo da uma idéia geral desse fluxo.&lt;/p&gt;
+
+&lt;figure style=&quot;width: 600px&quot; class=&quot;align-center&quot;&gt;
+    &lt;a href=&quot;/assets/images/gitflow/pic_01.png&quot;&gt;&lt;img src=&quot;/assets/images/gitflow/pic_01.png&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;A tabela abaixo detalha os nomes e o que significa cada nome de branch:&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;
+&lt;div style=&quot;width: 50%;&quot;&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Situação&lt;/th&gt;
+      &lt;th&gt;Branch&lt;/th&gt;
+      &lt;th&gt;Descrição, Instruções&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Estável&lt;/td&gt;
+      &lt;td&gt;master&lt;/td&gt;
+      &lt;td&gt;Aceita merges a partir da Release e Hotfixes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Trabalho&lt;/td&gt;
+      &lt;td&gt;develop&lt;/td&gt;
+      &lt;td&gt;Aceita merges a partir das Features e Hotfixes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Features Internas&lt;/td&gt;
+      &lt;td&gt;feature-id&lt;/td&gt;
+      &lt;td&gt;Cria-se a partir da develop&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Bugfix&lt;/td&gt;
+      &lt;td&gt;bugfix-id&lt;/td&gt;
+      &lt;td&gt;Cria-se a partir da branch develop&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Hotfix &lt;/td&gt;
+      &lt;td&gt;hotfix-id&lt;/td&gt;
+      &lt;td&gt;Cria-se  branch a partir da master &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;feature-branches&quot;&gt;Feature Branches&lt;/h1&gt;
+
+&lt;p&gt;Cada nova feature usa a &lt;strong&gt;develop&lt;/strong&gt; como branch de origem. &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;git checkout develop&lt;/code&gt; &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;git checkout -b feature-id&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Após as modificações efetuadas realize o commit no seguinte padrão: :fire: &lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git commit -m &quot;[Feature-id] - Breve descrição da tarefa&quot;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Exemplo para Hotfix - Correções que precisem entrar na produção imediatamente. &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;git commit -m &quot;[Hotfix-id] - Breve descrição da tarefa&quot;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Após o commit realizado deve-se obter as mudanças remotas :arrows_clockwise: realizadas na branch &lt;strong&gt;develop&lt;/strong&gt; :satellite: :&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;git checkout develop&lt;/code&gt; &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;git pull --rebase&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Voltando para a branch da feature :hammer: . Aplicam-se as modificações já trazidas da &lt;strong&gt;develop&lt;/strong&gt; &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;git checkout feature-id&lt;/code&gt; &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;git rebase develop&lt;/code&gt; &lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;PS: :no_entry_sign: &lt;strong&gt;NÃO&lt;/strong&gt; utilize o seguinte comando &lt;code class=&quot;highlighter-rouge&quot;&gt;git merge develop&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Deve-se enviar :rocket: suas modificações para que se realize o Pull Request  : &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;git push origin feature-id&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;A partir daí crie um Merge Request pela interface web do Gitlab.&lt;/p&gt;
+
+&lt;p&gt;Aguarde o código ser revisado por outro desenvolvedor, caso aprovado ele será mesclado com a &lt;strong&gt;develop&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;release--helicopter&quot;&gt;Release  :helicopter:&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;As branchs de release funcionam como uma área de armazenamento temporário entre o desenvolvimento (&lt;strong&gt;develop&lt;/strong&gt;) e produção (&lt;strong&gt;master&lt;/strong&gt;).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Preparação :&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Atualização da develop: &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;git checkout develop&lt;/code&gt; &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;git pull --rebase&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Incremente o valor da versão no &lt;strong&gt;pom.xml&lt;/strong&gt; caso necessário.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Criação da branch de release com base na develop: &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;git checkout -b release-x.x.x develop&lt;/code&gt; &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;git push origin release-x.x.x&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Atualizar branch &lt;strong&gt;develop&lt;/strong&gt;   :gun: ,  é importante atualizar, pois updates críticos podem ter sido adicionados na release branch, e eles precisam estar acessíveis na develop : &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;git checkout develop&lt;/code&gt; &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;git merge --no-ff release-x.x.x&lt;/code&gt; &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;git push origin develop&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&quot;produção--bullettrain_side&quot;&gt;Produção  :bullettrain_side:&lt;/h1&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Acesse a branch master: &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;git checkout master&lt;/code&gt; &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;git pull --rebase&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Faça merge da master &lt;strong&gt;sem&lt;/strong&gt; fast-forward com a release: &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;git merge --no-ff release-x.x.x&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Envie :rocket: para o repositório: &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;git push origin master&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Crie a tag na branch master com o número da versão que está no pom.xml: &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;git tag -a vx.x.x master&lt;/code&gt; &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;git push --tags&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&quot;hotfixes--ambulance&quot;&gt;Hotfixes  :ambulance:&lt;/h1&gt;
+
+&lt;h3 id=&quot;--bug-descoberto-em-produção-loudspeaker-&quot;&gt;- Bug descoberto em produção :loudspeaker: :&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Cria-se um branch de hotfix com ponto de partida na &lt;strong&gt;master&lt;/strong&gt; : &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;git checkout -b hotfix-id master&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Resolva o bug, e retorne para a master branch : &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;git checkout master&lt;/code&gt; &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;git pull --rebase&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Faça um merge &lt;strong&gt;sem&lt;/strong&gt; fast-forward, seguido de push da seguinte forma: &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;git checkout master&lt;/code&gt; &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;git merge --no-ff hotfix-id&lt;/code&gt; &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;git push origin master&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Incremente o valor tag na branch master &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;git checkout master&lt;/code&gt; &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;git tag -a v1.x.1 master&lt;/code&gt; &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;git push --tags&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Retorne para a develop, atualize-a  :arrow_down: com o hotfix seguido de push :triangular_flag_on_post: : &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;git checkout develop&lt;/code&gt; &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;git pull --rebase&lt;/code&gt; &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;git merge --no-ff hotfix-id&lt;/code&gt; &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;git push origin develop&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;--bug--bug-descoberto-na-release-branch-mega-&quot;&gt;- Bug  :bug: descoberto na release branch :mega: :&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Cria-se um branch de hotfix com ponto de partida na &lt;strong&gt;release-x.x.x&lt;/strong&gt;: &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;git checkout -b bugfix-id release-x.x.x&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Resolva bug, e retorne para a release branch : &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;git checkout release-x.x.x&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Faça um merge &lt;strong&gt;sem&lt;/strong&gt; fast-forward seguido de push, da seguinte forma: &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;git merge --no-ff bugfix-id&lt;/code&gt; &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;git push origin release-x.x.x&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Retorne para a develop, atualize-a  :arrow_down: com o bugfix seguido de push :triangular_flag_on_post: : &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;git checkout develop&lt;/code&gt; &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;git merge --no-ff bugfix-id&lt;/code&gt; &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;git push origin develop&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;
+&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;Qualquer dúvida postem nos comentários !!!! :loudspeaker:&lt;/p&gt;</content><author><name>felipealvesgnu</name></author><summary type="html">Este tutorial tem por objetivo facilitar o entendimento e aplicabilidade da forma como GitFlow funciona, sem enrolação e direto ao ponto:</summary></entry><entry><title type="html">IntelliJ - Application context configuration</title><link href="https://felipealvesgnu.github.io/intellij/java/intellij-application-context-configuration/" rel="alternate" type="text/html" title="IntelliJ - Application context configuration" /><published>2016-11-23T11:05:04-03:00</published><updated>2016-11-23T11:05:04-03:00</updated><id>https://felipealvesgnu.github.io/intellij/java/intellij-application-context-configuration</id><content type="html" xml:base="https://felipealvesgnu.github.io/intellij/java/intellij-application-context-configuration/">&lt;p&gt;After spending some time trying to discover why my JSF application worked on eclipse and didn’t on IntelliJ, I found a TomCat setup configuration at &lt;strong&gt;Run/Debug Configurations.&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;And it was like in that picture bellow:&lt;/p&gt;
 
@@ -32,7 +229,7 @@
     &lt;a href=&quot;/assets/images/intelliJ/pic_04_context.png&quot;&gt;&lt;img src=&quot;/assets/images/intelliJ/pic_04_context.png&quot; /&gt;&lt;/a&gt;
 &lt;/figure&gt;
 
-&lt;p&gt;That’s All.&lt;/p&gt;</content><author><name>felipealvesgnu</name></author><summary type="html">After2 spending some time trying to discover why my JSF application worked on eclipse and didn’t on IntelliJ, I found a TomCat setup configuration at Run/Debug Configurations.</summary></entry><entry><title type="html">How to add a Server Runtime Library to a Java EE project using IntelliJ IDEA</title><link href="https://felipealvesgnu.github.io/java/how-to-add-a-server-runtime-library-to-a-java-ee-project-using-intellij-idea/" rel="alternate" type="text/html" title="How to add a Server Runtime Library to a Java EE project using IntelliJ IDEA" /><published>2014-11-13T12:23:49-03:00</published><updated>2014-11-13T12:23:49-03:00</updated><id>https://felipealvesgnu.github.io/java/how-to-add-a-server-runtime-library-to-a-java-ee-project-using-intellij-idea</id><content type="html" xml:base="https://felipealvesgnu.github.io/java/how-to-add-a-server-runtime-library-to-a-java-ee-project-using-intellij-idea/">&lt;p&gt;After I have some difficult to add server libraries to the project, because in IntelliJ is a lit bit different from Eclipse, I’ve decided to post the solution:&lt;/p&gt;
+&lt;p&gt;That’s All.&lt;/p&gt;</content><author><name>felipealvesgnu</name></author><summary type="html">After spending some time trying to discover why my JSF application worked on eclipse and didn’t on IntelliJ, I found a TomCat setup configuration at Run/Debug Configurations.</summary></entry><entry><title type="html">How to add a Server Runtime Library to a Java EE project using IntelliJ IDEA</title><link href="https://felipealvesgnu.github.io/java/how-to-add-a-server-runtime-library-to-a-java-ee-project-using-intellij-idea/" rel="alternate" type="text/html" title="How to add a Server Runtime Library to a Java EE project using IntelliJ IDEA" /><published>2014-11-13T12:23:49-03:00</published><updated>2014-11-13T12:23:49-03:00</updated><id>https://felipealvesgnu.github.io/java/how-to-add-a-server-runtime-library-to-a-java-ee-project-using-intellij-idea</id><content type="html" xml:base="https://felipealvesgnu.github.io/java/how-to-add-a-server-runtime-library-to-a-java-ee-project-using-intellij-idea/">&lt;p&gt;After I have some difficult to add server libraries to the project, because in IntelliJ is a lit bit different from Eclipse, I’ve decided to post the solution:&lt;/p&gt;
 
 &lt;p&gt;After the project has been opened you will need go in &lt;strong&gt;File&lt;/strong&gt; -&amp;gt; &lt;strong&gt;Project Structure&lt;/strong&gt;.&lt;/p&gt;
 
