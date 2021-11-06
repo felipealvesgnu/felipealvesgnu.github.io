@@ -104,7 +104,7 @@
 
   </head>
 
-  <body class="layout--single">
+  <body class="layout--splash">
 
     <!--[if lt IE 9]>
 <div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
@@ -134,121 +134,15 @@
     <div class="initial-content">
       
 
-
-
 <div id="main" role="main">
-  
-  <div class="sidebar sticky">
-  
-
-
-<div itemscope itemtype="https://schema.org/Person">
-
-  
-
-  <div class="author__content">
-    
-      <h3 class="author__name" itemprop="name"></h3>
-    
-    
-  </div>
-
-  <div class="author__urls-wrapper">
-    <button class="btn btn--inverse">Follow</button>
-    <ul class="author__urls social-icons">
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      <!--
-  <li>
-    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
-      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
-    </a>
-  </li>
--->
-    </ul>
-  </div>
-</div>
-
-  
-  </div>
-
-
-  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+  <article class="splash" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Gitflow">
     <meta itemprop="description" content="Este tutorial tem por objetivo facilitar o entendimento e aplicabilidade da forma como GitFlow funciona, sem enrolação e direto ao ponto:">
     <meta itemprop="datePublished" content="August 28, 2020">
     
 
-    <div class="page__inner-wrap">
-      
-        <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">Gitflow
-</h1>
-          
-            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
-
-
-
-
-  3 minute read
-</p>
-          
-        </header>
-      
-
-      <section class="page__content" itemprop="text">
-        
-        <p>Este tutorial tem por objetivo facilitar o entendimento e aplicabilidade da forma como GitFlow funciona, sem enrolação e direto ao ponto:</p>
+    <section class="page__content" itemprop="text">
+      <p>Este tutorial tem por objetivo facilitar o entendimento e aplicabilidade da forma como GitFlow funciona, sem enrolação e direto ao ponto:</p>
 
 <p>Gitflow é um projeto de fluxo de trabalho do Git que foi popularizado por Vincent Driessen. 
 O fluxo define um modelo de ramificação estrito projetado em torno do lançamento e a publicaçāo do projeto.
@@ -304,29 +198,35 @@ A imagem abaixo da uma idéia geral desse fluxo.</p>
 
 <h1 id="feature-branches">Feature Branches</h1>
 
-<p>Cada nova feature usa a <strong>develop</strong> como branch de origem. <br>
-<code class="highlighter-rouge">git checkout develop</code> <br>
-<code class="highlighter-rouge">git checkout -b feature-id</code></p>
+<p>Cada nova feature usa a <strong>develop</strong> como branch de origem. <br></p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git checkout develop
+<span class="nv">$ </span>git checkout <span class="nt">-b</span> feature-id
+</code></pre></div></div>
 
 <p>Após as modificações efetuadas realize o commit no seguinte padrão: <img class="emoji" title=":fire:" alt=":fire:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f525.png" height="20" width="20"> <br></p>
 
-<p><code class="highlighter-rouge">git commit -m "[Feature-id] - Breve descrição da tarefa"</code></p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git commit <span class="nt">-m</span> <span class="s2">"[Feature-id] - Breve descrição da tarefa"</span>
+</code></pre></div></div>
 
-<p>Exemplo para Hotfix - Correções que precisem entrar na produção imediatamente. <br>
-<code class="highlighter-rouge">git commit -m "[Hotfix-id] - Breve descrição da tarefa"</code></p>
+<p>Exemplo para Hotfix - Correções que precisem entrar na produção imediatamente. <br></p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git commit <span class="nt">-m</span> <span class="s2">"[Hotfix-id] - Breve descrição da tarefa
+</span></code></pre></div></div>
 
-<p>Após o commit realizado deve-se obter as mudanças remotas <img class="emoji" title=":arrows_clockwise:" alt=":arrows_clockwise:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f503.png" height="20" width="20"> realizadas na branch <strong>develop</strong> <img class="emoji" title=":satellite:" alt=":satellite:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f4e1.png" height="20" width="20"> :<br>
-<code class="highlighter-rouge">git checkout develop</code> <br>
-<code class="highlighter-rouge">git pull --rebase</code></p>
+<p>Após o commit realizado deve-se obter as mudanças remotas <img class="emoji" title=":arrows_clockwise:" alt=":arrows_clockwise:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f503.png" height="20" width="20"> realizadas na branch <strong>develop</strong> <img class="emoji" title=":satellite:" alt=":satellite:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f4e1.png" height="20" width="20"> :<br></p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git checkout develop
+<span class="nv">$ </span>git pull <span class="nt">--rebase</span>
+</code></pre></div></div>
 
-<p>Voltando para a branch da feature <img class="emoji" title=":hammer:" alt=":hammer:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f528.png" height="20" width="20"> . Aplicam-se as modificações já trazidas da <strong>develop</strong> <br>
-<code class="highlighter-rouge">git checkout feature-id</code> <br>
-<code class="highlighter-rouge">git rebase develop</code> <br></p>
+<p>Voltando para a branch da feature <img class="emoji" title=":hammer:" alt=":hammer:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f528.png" height="20" width="20"> . Aplicam-se as modificações já trazidas da <strong>develop</strong> <br></p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git checkout feature-id
+<span class="nv">$ </span>git rebase develop
+</code></pre></div></div>
 
-<p>PS: <img class="emoji" title=":no_entry_sign:" alt=":no_entry_sign:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f6ab.png" height="20" width="20"> <strong>NÃO</strong> utilize o seguinte comando <code class="highlighter-rouge">git merge develop</code></p>
+<p>PS: <img class="emoji" title=":no_entry_sign:" alt=":no_entry_sign:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f6ab.png" height="20" width="20"> <strong>NÃO</strong> utilize o seguinte comando <code class="language-plaintext highlighter-rouge">git merge develop</code></p>
 
-<p>Deve-se enviar <img class="emoji" title=":rocket:" alt=":rocket:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f680.png" height="20" width="20"> suas modificações para que se realize o Pull Request  : <br>
-<code class="highlighter-rouge">git push origin feature-id</code></p>
+<p>Deve-se enviar <img class="emoji" title=":rocket:" alt=":rocket:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f680.png" height="20" width="20"> suas modificações para que se realize o Pull Request  : <br></p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git push origin feature-id
+</code></pre></div></div>
 
 <p>A partir daí crie um Merge Request pela interface web do Gitlab.</p>
 
@@ -341,24 +241,27 @@ A imagem abaixo da uma idéia geral desse fluxo.</p>
 <p>Preparação :</p>
 
 <ol>
-  <li>
-    <p>Atualização da develop: <br>
-<code class="highlighter-rouge">git checkout develop</code> <br>
-<code class="highlighter-rouge">git pull --rebase</code></p>
+  <li>Atualização da develop: <br>
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git checkout develop
+<span class="nv">$ </span>git pull <span class="nt">--rebase</span>
+</code></pre></div>    </div>
   </li>
   <li>
     <p>Incremente o valor da versão no <strong>pom.xml</strong> caso necessário.</p>
   </li>
-  <li>
-    <p>Criação da branch de release com base na develop: <br>
-<code class="highlighter-rouge">git checkout -b release-x.x.x develop</code> <br>
-<code class="highlighter-rouge">git push origin release-x.x.x</code></p>
+  <li>Criação da branch de release com base na develop: <br>
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git checkout <span class="nt">-b</span> release-x.x.x develop
+<span class="nv">$ </span>git push origin release-x.x.x
+</code></pre></div>    </div>
   </li>
-  <li>
-    <p>Atualizar branch <strong>develop</strong>   <img class="emoji" title=":gun:" alt=":gun:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f52b.png" height="20" width="20"> ,  é importante atualizar, pois updates críticos podem ter sido adicionados na release branch, e eles precisam estar acessíveis na develop : <br>
-<code class="highlighter-rouge">git checkout develop</code> <br>
-<code class="highlighter-rouge">git merge --no-ff release-x.x.x</code> <br>
-<code class="highlighter-rouge">git push origin develop</code></p>
+  <li>Atualizar branch <strong>develop</strong>   <img class="emoji" title=":gun:" alt=":gun:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f52b.png" height="20" width="20"> ,  é importante atualizar, pois updates críticos podem ter sido adicionados na release branch, e eles precisam estar acessíveis na develop : <br>
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git checkout develop
+<span class="nv">$ </span>git merge <span class="nt">--no-ff</span> release-x.x.x
+<span class="nv">$ </span>git push origin develop
+</code></pre></div>    </div>
   </li>
 </ol>
 
@@ -366,23 +269,27 @@ A imagem abaixo da uma idéia geral desse fluxo.</p>
 </h1>
 
 <ol>
-  <li>
-    <p>Acesse a branch master: <br>
-<code class="highlighter-rouge">git checkout master</code> <br>
-<code class="highlighter-rouge">git pull --rebase</code></p>
+  <li>Acesse a branch master: <br>
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git checkout master
+<span class="nv">$ </span>git pull <span class="nt">--rebase</span>
+</code></pre></div>    </div>
   </li>
-  <li>
-    <p>Faça merge da master <strong>sem</strong> fast-forward com a release: <br>
-<code class="highlighter-rouge">git merge --no-ff release-x.x.x</code></p>
+  <li>Faça merge da master <strong>sem</strong> fast-forward com a release: <br>
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git merge <span class="nt">--no-ff</span> release-x.x.x
+</code></pre></div>    </div>
   </li>
-  <li>
-    <p>Envie <img class="emoji" title=":rocket:" alt=":rocket:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f680.png" height="20" width="20"> para o repositório: <br>
-<code class="highlighter-rouge">git push origin master</code></p>
+  <li>Envie <img class="emoji" title=":rocket:" alt=":rocket:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f680.png" height="20" width="20"> para o repositório: <br>
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git push origin master
+</code></pre></div>    </div>
   </li>
-  <li>
-    <p>Crie a tag na branch master com o número da versão que está no pom.xml: <br>
-<code class="highlighter-rouge">git tag -a vx.x.x master</code> <br>
-<code class="highlighter-rouge">git push --tags</code></p>
+  <li>Crie a tag na branch master com o número da versão que está no pom.xml: <br>
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git tag <span class="nt">-a</span> vx.x.x master
+<span class="nv">$ </span>git push <span class="nt">--tags</span>
+</code></pre></div>    </div>
   </li>
 </ol>
 
@@ -391,246 +298,73 @@ A imagem abaixo da uma idéia geral desse fluxo.</p>
 
 <h3 id="--bug-descoberto-em-produção-loudspeaker-">- Bug descoberto em produção <img class="emoji" title=":loudspeaker:" alt=":loudspeaker:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f4e2.png" height="20" width="20"> :</h3>
 <ul>
-  <li>
-    <p>Cria-se um branch de hotfix com ponto de partida na <strong>master</strong> : <br>
-<code class="highlighter-rouge">git checkout -b hotfix-id master</code></p>
+  <li>Cria-se um branch de hotfix com ponto de partida na <strong>master</strong> : <br>
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git checkout <span class="nt">-b</span> hotfix-id master
+</code></pre></div>    </div>
   </li>
-  <li>
-    <p>Resolva o bug, e retorne para a master branch : <br>
-<code class="highlighter-rouge">git checkout master</code> <br>
-<code class="highlighter-rouge">git pull --rebase</code></p>
+  <li>Resolva o bug, e retorne para a master branch : <br>
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git checkout master
+<span class="nv">$ </span>git pull <span class="nt">--rebase</span>
+</code></pre></div>    </div>
   </li>
-  <li>
-    <p>Faça um merge <strong>sem</strong> fast-forward, seguido de push da seguinte forma: <br>
-<code class="highlighter-rouge">git checkout master</code> <br>
-<code class="highlighter-rouge">git merge --no-ff hotfix-id</code> <br>
-<code class="highlighter-rouge">git push origin master</code></p>
+  <li>Faça um merge <strong>sem</strong> fast-forward, seguido de push da seguinte forma: <br>
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git checkout master
+<span class="nv">$ </span>git merge <span class="nt">--no-ff</span> hotfix-id
+<span class="nv">$ </span>git push origin master
+</code></pre></div>    </div>
   </li>
-  <li>
-    <p>Incremente o valor tag na branch master <br>
-<code class="highlighter-rouge">git checkout master</code> <br>
-<code class="highlighter-rouge">git tag -a v1.x.1 master</code> <br>
-<code class="highlighter-rouge">git push --tags</code></p>
+  <li>Incremente o valor tag na branch master <br>
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git checkout master
+<span class="nv">$ </span>git tag <span class="nt">-a</span> v1.x.1 master
+<span class="nv">$ </span>git push <span class="nt">--tags</span>
+</code></pre></div>    </div>
   </li>
-  <li>
-    <p>Retorne para a develop, atualize-a  <img class="emoji" title=":arrow_down:" alt=":arrow_down:" src="https://github.githubassets.com/images/icons/emoji/unicode/2b07.png" height="20" width="20"> com o hotfix seguido de push <img class="emoji" title=":triangular_flag_on_post:" alt=":triangular_flag_on_post:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f6a9.png" height="20" width="20"> : <br>
-<code class="highlighter-rouge">git checkout develop</code> <br>
-<code class="highlighter-rouge">git pull --rebase</code> <br>
-<code class="highlighter-rouge">git merge --no-ff hotfix-id</code> <br>
-<code class="highlighter-rouge">git push origin develop</code></p>
+  <li>Retorne para a develop, atualize-a  <img class="emoji" title=":arrow_down:" alt=":arrow_down:" src="https://github.githubassets.com/images/icons/emoji/unicode/2b07.png" height="20" width="20"> com o hotfix seguido de push <img class="emoji" title=":triangular_flag_on_post:" alt=":triangular_flag_on_post:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f6a9.png" height="20" width="20"> : <br>
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>checkout develop
+<span class="nv">$ </span>git pull <span class="nt">--rebase</span>
+<span class="nv">$ </span>git merge <span class="nt">--no-ff</span> hotfix-id
+<span class="nv">$ </span>git push origin develop
+</code></pre></div>    </div>
   </li>
 </ul>
 
 <h3 id="--bug--bug-descoberto-na-release-branch-mega-">- Bug  <img class="emoji" title=":bug:" alt=":bug:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f41b.png" height="20" width="20"> descoberto na release branch <img class="emoji" title=":mega:" alt=":mega:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f4e3.png" height="20" width="20"> :</h3>
 
 <ul>
-  <li>
-    <p>Cria-se um branch de hotfix com ponto de partida na <strong>release-x.x.x</strong>: <br>
-<code class="highlighter-rouge">git checkout -b bugfix-id release-x.x.x</code></p>
+  <li>Cria-se um branch de hotfix com ponto de partida na <strong>release-x.x.x</strong>: <br>
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>checkout <span class="nt">-b</span> bugfix-id release-x.x.x
+</code></pre></div>    </div>
   </li>
-  <li>
-    <p>Resolva bug, e retorne para a release branch : <br>
-<code class="highlighter-rouge">git checkout release-x.x.x</code></p>
+  <li>Resolva bug, e retorne para a release branch : <br>
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>checkout release-x.x.x
+</code></pre></div>    </div>
   </li>
-  <li>
-    <p>Faça um merge <strong>sem</strong> fast-forward seguido de push, da seguinte forma: <br>
-<code class="highlighter-rouge">git merge --no-ff bugfix-id</code> <br>
-<code class="highlighter-rouge">git push origin release-x.x.x</code></p>
+  <li>Faça um merge <strong>sem</strong> fast-forward seguido de push, da seguinte forma: <br>
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>merge <span class="nt">--no-ff</span> bugfix-id
+<span class="nv">$ </span>git push origin release-x.x.x
+</code></pre></div>    </div>
   </li>
-  <li>
-    <p>Retorne para a develop, atualize-a  <img class="emoji" title=":arrow_down:" alt=":arrow_down:" src="https://github.githubassets.com/images/icons/emoji/unicode/2b07.png" height="20" width="20"> com o bugfix seguido de push <img class="emoji" title=":triangular_flag_on_post:" alt=":triangular_flag_on_post:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f6a9.png" height="20" width="20"> : <br>
-<code class="highlighter-rouge">git checkout develop</code> <br>
-<code class="highlighter-rouge">git merge --no-ff bugfix-id</code> <br>
-<code class="highlighter-rouge">git push origin develop</code></p>
+  <li>Retorne para a develop, atualize-a  <img class="emoji" title=":arrow_down:" alt=":arrow_down:" src="https://github.githubassets.com/images/icons/emoji/unicode/2b07.png" height="20" width="20"> com o bugfix seguido de push <img class="emoji" title=":triangular_flag_on_post:" alt=":triangular_flag_on_post:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f6a9.png" height="20" width="20"> : <br>
+    <div class="language-shell highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>checkout develop
+<span class="nv">$ </span>git merge <span class="nt">--no-ff</span> bugfix-id
+<span class="nv">$ </span>git push origin develop
+</code></pre></div>    </div>
   </li>
 </ul>
 
-<p><br>
-<br></p>
-
 <p>Qualquer dúvida postem nos comentários !!!! <img class="emoji" title=":loudspeaker:" alt=":loudspeaker:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f4e2.png" height="20" width="20"></p>
 
-        
-      </section>
-
-      <footer class="page__meta">
-        
-        
-
-
-  
-
-
-  
-  
-  
-
-  <p class="page__taxonomy">
-    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
-    <span itemprop="keywords">
-    
-      
-      
-      <a href="/categories/#git" class="page__taxonomy-item" rel="tag">Git</a>
-    
-    </span>
-  </p>
-
-
-        
-          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-08-28T11:23:49-04:00">August 28, 2020</time></p>
-        
-      </footer>
-
-      <section class="page__share">
-  
-    <h4 class="page__share-title">Share on</h4>
-  
-
-  <a href="https://twitter.com/intent/tweet?text=Gitflow%20https%3A%2F%2Ffelipealvesgnu.github.io%2Fgit%2Fgitflow%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
-
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Ffelipealvesgnu.github.io%2Fgit%2Fgitflow%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
-
-  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Ffelipealvesgnu.github.io%2Fgit%2Fgitflow%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
-</section>
-
-
-      
-  <nav class="pagination">
-    
-      <a href="/intellij/java/intellij-application-context-configuration/" class="pagination--pager" title="IntelliJ - Application context configuration
-">Previous</a>
-    
-    
-      <a href="#" class="pagination--pager disabled">Next</a>
-    
-  </nav>
-
-    </div>
-
-    
+    </section>
   </article>
-
-  
-  
-    <div class="page__related">
-      <h4 class="page__related-title">You may also enjoy</h4>
-      <div class="grid__wrapper">
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/intellij/java/intellij-application-context-configuration/" rel="permalink">IntelliJ - Application context configuration
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
-
-
-
-
-  1 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">After spending some time trying to discover why my JSF application worked on eclipse and didn’t on IntelliJ, I found a TomCat setup configuration at Run/Debu...</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/java/how-to-add-a-server-runtime-library-to-a-java-ee-project-using-intellij-idea/" rel="permalink">How to add a Server Runtime Library to a Java EE project using IntelliJ IDEA
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
-
-
-
-
-  less than 1 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">After I have some difficult to add server libraries to the project, because in IntelliJ is a lit bit different from Eclipse, I’ve decided to post the solutio...</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/java/linux/install-oracleclient-11-64-bits-no-ubuntu64-bits-12-04/" rel="permalink">Install oracle client 11 (64 bits) on ubuntu(64 bits) 12
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
-
-
-
-
-  2 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">I have recently faced some difficulties in installing the oracle client in ubuntu and have JBoss ‘see’ the client installation, since it is approved for RedH...</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/java/serializacao-e-desserializacao-de-objetos/" rel="permalink">Serialização e Desserialização de Objetos em Java
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
-
-
-
-
-  3 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">Serialização
-
-</p>
-  </article>
-</div>
-
-        
-      </div>
-    </div>
-  
-  
 </div>
 
     </div>
@@ -672,7 +406,7 @@ A imagem abaixo da uma idéia geral desse fluxo.</p>
   </ul>
 </div>
 
-<div class="page__footer-copyright">© 2020 Felipe A. L. Pereira. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">© 2021 Felipe A. L. Pereira. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
 
       </footer>
     </div>

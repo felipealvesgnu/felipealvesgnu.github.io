@@ -1,4 +1,96 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://felipealvesgnu.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://felipealvesgnu.github.io/" rel="alternate" type="text/html" /><updated>2020-08-28T17:33:54-04:00</updated><id>https://felipealvesgnu.github.io/feed.xml</id><title type="html">Felipe’s blog - Software Development</title><subtitle>An amazing website.</subtitle><author><name>Felipe A L Pereira</name></author><entry><title type="html">Gitflow</title><link href="https://felipealvesgnu.github.io/git/gitflow/" rel="alternate" type="text/html" title="Gitflow" /><published>2020-08-28T11:23:49-04:00</published><updated>2020-08-28T11:23:49-04:00</updated><id>https://felipealvesgnu.github.io/git/gitflow</id><content type="html" xml:base="https://felipealvesgnu.github.io/git/gitflow/">&lt;p&gt;Este tutorial tem por objetivo facilitar o entendimento e aplicabilidade da forma como GitFlow funciona, sem enrolação e direto ao ponto:&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.1">Jekyll</generator><link href="https://felipealvesgnu.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://felipealvesgnu.github.io/" rel="alternate" type="text/html" /><updated>2021-11-06T11:58:22-04:00</updated><id>https://felipealvesgnu.github.io/feed.xml</id><title type="html">Felipe’s blog - Software Development</title><subtitle>An amazing website.</subtitle><author><name>Felipe A L Pereira</name></author><entry><title type="html">Helm Error</title><link href="https://felipealvesgnu.github.io/k8s/helm/" rel="alternate" type="text/html" title="Helm Error" /><published>2021-11-05T00:00:00-04:00</published><updated>2021-11-05T00:00:00-04:00</updated><id>https://felipealvesgnu.github.io/k8s/helm</id><content type="html" xml:base="https://felipealvesgnu.github.io/k8s/helm/">&lt;h1 id=&quot;erro-com-helm&quot;&gt;Erro com Helm&lt;/h1&gt;
+
+&lt;p&gt;Eu tentando a fazer a instalação do chart do NGINX no Helm com o seguinte comando:&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt; helm &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;my-ingress ingress-nginx/ingress-nginx
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;me retorna  este erro :ambulance: :&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Error: INSTALLATION FAILED: rendered manifests contain a resource that already exists. 
+Unable to &lt;span class=&quot;k&quot;&gt;continue &lt;/span&gt;with &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt;: IngressClass &lt;span class=&quot;s2&quot;&gt;&quot;nginx&quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;namespace &lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt; 
+exists and cannot be imported into the current release: invalid ownership metadata&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; 
+annotation validation error: missing key &lt;span class=&quot;s2&quot;&gt;&quot;meta.helm.sh/release-name&quot;&lt;/span&gt;: must be &lt;span class=&quot;nb&quot;&gt;set &lt;/span&gt;to &lt;span class=&quot;s2&quot;&gt;&quot;my-ingress&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; 
+annotation validation error: missing key &lt;span class=&quot;s2&quot;&gt;&quot;meta.helm.sh/release-namespace&quot;&lt;/span&gt;: must be &lt;span class=&quot;nb&quot;&gt;set &lt;/span&gt;to &lt;span class=&quot;s2&quot;&gt;&quot;default&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;O Helm está informando que já existe um recurso de nginx instalado no meu namespace.&lt;/p&gt;
+
+&lt;p&gt;A gente precisa então verificar onde estaria esta ingressClass utilizando o &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;kubectl get&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt; kubectl get ingressClass &lt;span class=&quot;nt&quot;&gt;-A&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;que me retornou a seguinte informação:&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;NAME    CONTROLLER             PARAMETERS   AGE
+nginx   k8s.io/ingress-nginx   none       43h
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Note que é a classe que está impedindo a instalação do helm chart do ingress!!!&lt;/p&gt;
+
+&lt;p&gt;Preciso então deletar, para que possa prosseguir:&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt; kubectl delete ingressClass nginx &lt;span class=&quot;nt&quot;&gt;-A&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;e então rodamos:&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt; helm &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;my-ingress ingress-nginx/ingress-nginx
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;que irá retornar:&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;NAME: meu-ingress
+LAST DEPLOYED: Wed Nov  3 17:54:54 2021
+NAMESPACE: nginx-ingress
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+The ingress-nginx controller has been installed.
+It may take a few minutes &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;the LoadBalancer IP to be available.
+You can watch the status by running &lt;span class=&quot;s1&quot;&gt;&apos;kubectl --namespace nginx-ingress get services -o wide -w meu-ingress-ingress-nginx-controller&apos;&lt;/span&gt;
+
+An example Ingress that makes use of the controller:
+
+  apiVersion: networking.k8s.io/v1
+  kind: Ingress
+  metadata:
+    annotations:
+      kubernetes.io/ingress.class: nginx
+    name: example
+    namespace: foo
+  spec:
+    ingressClassName: example-class
+    rules:
+      - host: www.example.com
+        http:
+          paths:
+            - path: /
+              pathType: Prefix
+              backend:
+                service:
+                  name: exampleService
+                  port: 80
+    &lt;span class=&quot;c&quot;&gt;# This section is only required if TLS is to be enabled for the Ingress&lt;/span&gt;
+    tls:
+      - hosts:
+        - www.example.com
+        secretName: example-tls
+
+If TLS is enabled &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;the Ingress, a Secret containing the certificate and key must also be provided:
+
+  apiVersion: v1
+  kind: Secret
+  metadata:
+    name: example-tls
+    namespace: foo
+  data:
+    tls.crt: &amp;lt;&lt;span class=&quot;nb&quot;&gt;base64 &lt;/span&gt;encoded cert&amp;gt;
+    tls.key: &amp;lt;&lt;span class=&quot;nb&quot;&gt;base64 &lt;/span&gt;encoded key&amp;gt;
+  &lt;span class=&quot;nb&quot;&gt;type&lt;/span&gt;: kubernetes.io/tls
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Pronto instalado com sucesso :raised_hands: !!!&lt;/p&gt;
+
+&lt;p&gt;Qualquer dúvida postem nos comentários !!!! :loudspeaker:&lt;/p&gt;</content><author><name>felipealvesgnu</name></author><category term="K8s" /><summary type="html">Erro com Helm</summary></entry><entry><title type="html">Gitflow</title><link href="https://felipealvesgnu.github.io/git/gitflow/" rel="alternate" type="text/html" title="Gitflow" /><published>2020-08-28T11:23:49-04:00</published><updated>2020-08-28T11:23:49-04:00</updated><id>https://felipealvesgnu.github.io/git/gitflow</id><content type="html" xml:base="https://felipealvesgnu.github.io/git/gitflow/">&lt;p&gt;Este tutorial tem por objetivo facilitar o entendimento e aplicabilidade da forma como GitFlow funciona, sem enrolação e direto ao ponto:&lt;/p&gt;
 
 &lt;p&gt;Gitflow é um projeto de fluxo de trabalho do Git que foi popularizado por Vincent Driessen. 
 O fluxo define um modelo de ramificação estrito projetado em torno do lançamento e a publicaçāo do projeto.
@@ -54,29 +146,35 @@ A imagem abaixo da uma idéia geral desse fluxo.&lt;/p&gt;
 
 &lt;h1 id=&quot;feature-branches&quot;&gt;Feature Branches&lt;/h1&gt;
 
-&lt;p&gt;Cada nova feature usa a &lt;strong&gt;develop&lt;/strong&gt; como branch de origem. &lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;git checkout develop&lt;/code&gt; &lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;git checkout -b feature-id&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Cada nova feature usa a &lt;strong&gt;develop&lt;/strong&gt; como branch de origem. &lt;br /&gt;&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git checkout develop
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git checkout &lt;span class=&quot;nt&quot;&gt;-b&lt;/span&gt; feature-id
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Após as modificações efetuadas realize o commit no seguinte padrão: :fire: &lt;br /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git commit -m &quot;[Feature-id] - Breve descrição da tarefa&quot;&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git commit &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;[Feature-id] - Breve descrição da tarefa&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Exemplo para Hotfix - Correções que precisem entrar na produção imediatamente. &lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;git commit -m &quot;[Hotfix-id] - Breve descrição da tarefa&quot;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Exemplo para Hotfix - Correções que precisem entrar na produção imediatamente. &lt;br /&gt;&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git commit &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;[Hotfix-id] - Breve descrição da tarefa
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Após o commit realizado deve-se obter as mudanças remotas :arrows_clockwise: realizadas na branch &lt;strong&gt;develop&lt;/strong&gt; :satellite: :&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;git checkout develop&lt;/code&gt; &lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;git pull --rebase&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Após o commit realizado deve-se obter as mudanças remotas :arrows_clockwise: realizadas na branch &lt;strong&gt;develop&lt;/strong&gt; :satellite: :&lt;br /&gt;&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git checkout develop
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git pull &lt;span class=&quot;nt&quot;&gt;--rebase&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Voltando para a branch da feature :hammer: . Aplicam-se as modificações já trazidas da &lt;strong&gt;develop&lt;/strong&gt; &lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;git checkout feature-id&lt;/code&gt; &lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;git rebase develop&lt;/code&gt; &lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;Voltando para a branch da feature :hammer: . Aplicam-se as modificações já trazidas da &lt;strong&gt;develop&lt;/strong&gt; &lt;br /&gt;&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git checkout feature-id
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git rebase develop
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;PS: :no_entry_sign: &lt;strong&gt;NÃO&lt;/strong&gt; utilize o seguinte comando &lt;code class=&quot;highlighter-rouge&quot;&gt;git merge develop&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;PS: :no_entry_sign: &lt;strong&gt;NÃO&lt;/strong&gt; utilize o seguinte comando &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git merge develop&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;Deve-se enviar :rocket: suas modificações para que se realize o Pull Request  : &lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;git push origin feature-id&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Deve-se enviar :rocket: suas modificações para que se realize o Pull Request  : &lt;br /&gt;&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git push origin feature-id
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;A partir daí crie um Merge Request pela interface web do Gitlab.&lt;/p&gt;
 
@@ -90,47 +188,47 @@ A imagem abaixo da uma idéia geral desse fluxo.&lt;/p&gt;
 &lt;p&gt;Preparação :&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;Atualização da develop: &lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;git checkout develop&lt;/code&gt; &lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;git pull --rebase&lt;/code&gt;&lt;/p&gt;
+  &lt;li&gt;Atualização da develop: &lt;br /&gt;
+    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git checkout develop
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git pull &lt;span class=&quot;nt&quot;&gt;--rebase&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Incremente o valor da versão no &lt;strong&gt;pom.xml&lt;/strong&gt; caso necessário.&lt;/p&gt;
   &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Criação da branch de release com base na develop: &lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;git checkout -b release-x.x.x develop&lt;/code&gt; &lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;git push origin release-x.x.x&lt;/code&gt;&lt;/p&gt;
+  &lt;li&gt;Criação da branch de release com base na develop: &lt;br /&gt;
+    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git checkout &lt;span class=&quot;nt&quot;&gt;-b&lt;/span&gt; release-x.x.x develop
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git push origin release-x.x.x
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Atualizar branch &lt;strong&gt;develop&lt;/strong&gt;   :gun: ,  é importante atualizar, pois updates críticos podem ter sido adicionados na release branch, e eles precisam estar acessíveis na develop : &lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;git checkout develop&lt;/code&gt; &lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;git merge --no-ff release-x.x.x&lt;/code&gt; &lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;git push origin develop&lt;/code&gt;&lt;/p&gt;
+  &lt;li&gt;Atualizar branch &lt;strong&gt;develop&lt;/strong&gt;   :gun: ,  é importante atualizar, pois updates críticos podem ter sido adicionados na release branch, e eles precisam estar acessíveis na develop : &lt;br /&gt;
+    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git checkout develop
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git merge &lt;span class=&quot;nt&quot;&gt;--no-ff&lt;/span&gt; release-x.x.x
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git push origin develop
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;h1 id=&quot;produção--bullettrain_side&quot;&gt;Produção  :bullettrain_side:&lt;/h1&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;Acesse a branch master: &lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;git checkout master&lt;/code&gt; &lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;git pull --rebase&lt;/code&gt;&lt;/p&gt;
+  &lt;li&gt;Acesse a branch master: &lt;br /&gt;
+    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git checkout master
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git pull &lt;span class=&quot;nt&quot;&gt;--rebase&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Faça merge da master &lt;strong&gt;sem&lt;/strong&gt; fast-forward com a release: &lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;git merge --no-ff release-x.x.x&lt;/code&gt;&lt;/p&gt;
+  &lt;li&gt;Faça merge da master &lt;strong&gt;sem&lt;/strong&gt; fast-forward com a release: &lt;br /&gt;
+    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git merge &lt;span class=&quot;nt&quot;&gt;--no-ff&lt;/span&gt; release-x.x.x
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Envie :rocket: para o repositório: &lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;git push origin master&lt;/code&gt;&lt;/p&gt;
+  &lt;li&gt;Envie :rocket: para o repositório: &lt;br /&gt;
+    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git push origin master
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Crie a tag na branch master com o número da versão que está no pom.xml: &lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;git tag -a vx.x.x master&lt;/code&gt; &lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;git push --tags&lt;/code&gt;&lt;/p&gt;
+  &lt;li&gt;Crie a tag na branch master com o número da versão que está no pom.xml: &lt;br /&gt;
+    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git tag &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt; vx.x.x master
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git push &lt;span class=&quot;nt&quot;&gt;--tags&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
 &lt;/ol&gt;
 
@@ -138,64 +236,61 @@ A imagem abaixo da uma idéia geral desse fluxo.&lt;/p&gt;
 
 &lt;h3 id=&quot;--bug-descoberto-em-produção-loudspeaker-&quot;&gt;- Bug descoberto em produção :loudspeaker: :&lt;/h3&gt;
 &lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Cria-se um branch de hotfix com ponto de partida na &lt;strong&gt;master&lt;/strong&gt; : &lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;git checkout -b hotfix-id master&lt;/code&gt;&lt;/p&gt;
+  &lt;li&gt;Cria-se um branch de hotfix com ponto de partida na &lt;strong&gt;master&lt;/strong&gt; : &lt;br /&gt;
+    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git checkout &lt;span class=&quot;nt&quot;&gt;-b&lt;/span&gt; hotfix-id master
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Resolva o bug, e retorne para a master branch : &lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;git checkout master&lt;/code&gt; &lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;git pull --rebase&lt;/code&gt;&lt;/p&gt;
+  &lt;li&gt;Resolva o bug, e retorne para a master branch : &lt;br /&gt;
+    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git checkout master
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git pull &lt;span class=&quot;nt&quot;&gt;--rebase&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Faça um merge &lt;strong&gt;sem&lt;/strong&gt; fast-forward, seguido de push da seguinte forma: &lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;git checkout master&lt;/code&gt; &lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;git merge --no-ff hotfix-id&lt;/code&gt; &lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;git push origin master&lt;/code&gt;&lt;/p&gt;
+  &lt;li&gt;Faça um merge &lt;strong&gt;sem&lt;/strong&gt; fast-forward, seguido de push da seguinte forma: &lt;br /&gt;
+    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git checkout master
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git merge &lt;span class=&quot;nt&quot;&gt;--no-ff&lt;/span&gt; hotfix-id
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git push origin master
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Incremente o valor tag na branch master &lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;git checkout master&lt;/code&gt; &lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;git tag -a v1.x.1 master&lt;/code&gt; &lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;git push --tags&lt;/code&gt;&lt;/p&gt;
+  &lt;li&gt;Incremente o valor tag na branch master &lt;br /&gt;
+    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git checkout master
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git tag &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt; v1.x.1 master
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git push &lt;span class=&quot;nt&quot;&gt;--tags&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Retorne para a develop, atualize-a  :arrow_down: com o hotfix seguido de push :triangular_flag_on_post: : &lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;git checkout develop&lt;/code&gt; &lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;git pull --rebase&lt;/code&gt; &lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;git merge --no-ff hotfix-id&lt;/code&gt; &lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;git push origin develop&lt;/code&gt;&lt;/p&gt;
+  &lt;li&gt;Retorne para a develop, atualize-a  :arrow_down: com o hotfix seguido de push :triangular_flag_on_post: : &lt;br /&gt;
+    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;checkout develop
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git pull &lt;span class=&quot;nt&quot;&gt;--rebase&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git merge &lt;span class=&quot;nt&quot;&gt;--no-ff&lt;/span&gt; hotfix-id
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git push origin develop
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;--bug--bug-descoberto-na-release-branch-mega-&quot;&gt;- Bug  :bug: descoberto na release branch :mega: :&lt;/h3&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Cria-se um branch de hotfix com ponto de partida na &lt;strong&gt;release-x.x.x&lt;/strong&gt;: &lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;git checkout -b bugfix-id release-x.x.x&lt;/code&gt;&lt;/p&gt;
+  &lt;li&gt;Cria-se um branch de hotfix com ponto de partida na &lt;strong&gt;release-x.x.x&lt;/strong&gt;: &lt;br /&gt;
+    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;checkout &lt;span class=&quot;nt&quot;&gt;-b&lt;/span&gt; bugfix-id release-x.x.x
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Resolva bug, e retorne para a release branch : &lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;git checkout release-x.x.x&lt;/code&gt;&lt;/p&gt;
+  &lt;li&gt;Resolva bug, e retorne para a release branch : &lt;br /&gt;
+    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;checkout release-x.x.x
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Faça um merge &lt;strong&gt;sem&lt;/strong&gt; fast-forward seguido de push, da seguinte forma: &lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;git merge --no-ff bugfix-id&lt;/code&gt; &lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;git push origin release-x.x.x&lt;/code&gt;&lt;/p&gt;
+  &lt;li&gt;Faça um merge &lt;strong&gt;sem&lt;/strong&gt; fast-forward seguido de push, da seguinte forma: &lt;br /&gt;
+    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;merge &lt;span class=&quot;nt&quot;&gt;--no-ff&lt;/span&gt; bugfix-id
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git push origin release-x.x.x
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Retorne para a develop, atualize-a  :arrow_down: com o bugfix seguido de push :triangular_flag_on_post: : &lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;git checkout develop&lt;/code&gt; &lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;git merge --no-ff bugfix-id&lt;/code&gt; &lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;git push origin develop&lt;/code&gt;&lt;/p&gt;
+  &lt;li&gt;Retorne para a develop, atualize-a  :arrow_down: com o bugfix seguido de push :triangular_flag_on_post: : &lt;br /&gt;
+    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;checkout develop
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git merge &lt;span class=&quot;nt&quot;&gt;--no-ff&lt;/span&gt; bugfix-id
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git push origin develop
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;br /&gt;
-&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;Qualquer dúvida postem nos comentários !!!! :loudspeaker:&lt;/p&gt;</content><author><name>felipealvesgnu</name></author><summary type="html">Este tutorial tem por objetivo facilitar o entendimento e aplicabilidade da forma como GitFlow funciona, sem enrolação e direto ao ponto:</summary></entry><entry><title type="html">IntelliJ - Application context configuration</title><link href="https://felipealvesgnu.github.io/intellij/java/intellij-application-context-configuration/" rel="alternate" type="text/html" title="IntelliJ - Application context configuration" /><published>2016-11-23T11:05:04-03:00</published><updated>2016-11-23T11:05:04-03:00</updated><id>https://felipealvesgnu.github.io/intellij/java/intellij-application-context-configuration</id><content type="html" xml:base="https://felipealvesgnu.github.io/intellij/java/intellij-application-context-configuration/">&lt;p&gt;After spending some time trying to discover why my JSF application worked on eclipse and didn’t on IntelliJ, I found a TomCat setup configuration at &lt;strong&gt;Run/Debug Configurations.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Qualquer dúvida postem nos comentários !!!! :loudspeaker:&lt;/p&gt;</content><author><name>felipealvesgnu</name></author><category term="Git" /><summary type="html">Este tutorial tem por objetivo facilitar o entendimento e aplicabilidade da forma como GitFlow funciona, sem enrolação e direto ao ponto:</summary></entry><entry><title type="html">IntelliJ - Application context configuration</title><link href="https://felipealvesgnu.github.io/intellij/java/intellij-application-context-configuration/" rel="alternate" type="text/html" title="IntelliJ - Application context configuration" /><published>2016-11-23T11:05:04-03:00</published><updated>2016-11-23T11:05:04-03:00</updated><id>https://felipealvesgnu.github.io/intellij/java/intellij-application-context-configuration</id><content type="html" xml:base="https://felipealvesgnu.github.io/intellij/java/intellij-application-context-configuration/">&lt;p&gt;After spending some time trying to discover why my JSF application worked on eclipse and didn’t on IntelliJ, I found a TomCat setup configuration at &lt;strong&gt;Run/Debug Configurations.&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;And it was like in that picture bellow:&lt;/p&gt;
 
@@ -229,7 +324,7 @@ A imagem abaixo da uma idéia geral desse fluxo.&lt;/p&gt;
     &lt;a href=&quot;/assets/images/intelliJ/pic_04_context.png&quot;&gt;&lt;img src=&quot;/assets/images/intelliJ/pic_04_context.png&quot; /&gt;&lt;/a&gt;
 &lt;/figure&gt;
 
-&lt;p&gt;That’s All.&lt;/p&gt;</content><author><name>felipealvesgnu</name></author><summary type="html">After spending some time trying to discover why my JSF application worked on eclipse and didn’t on IntelliJ, I found a TomCat setup configuration at Run/Debug Configurations.</summary></entry><entry><title type="html">How to add a Server Runtime Library to a Java EE project using IntelliJ IDEA</title><link href="https://felipealvesgnu.github.io/java/how-to-add-a-server-runtime-library-to-a-java-ee-project-using-intellij-idea/" rel="alternate" type="text/html" title="How to add a Server Runtime Library to a Java EE project using IntelliJ IDEA" /><published>2014-11-13T12:23:49-03:00</published><updated>2014-11-13T12:23:49-03:00</updated><id>https://felipealvesgnu.github.io/java/how-to-add-a-server-runtime-library-to-a-java-ee-project-using-intellij-idea</id><content type="html" xml:base="https://felipealvesgnu.github.io/java/how-to-add-a-server-runtime-library-to-a-java-ee-project-using-intellij-idea/">&lt;p&gt;After I have some difficult to add server libraries to the project, because in IntelliJ is a lit bit different from Eclipse, I’ve decided to post the solution:&lt;/p&gt;
+&lt;p&gt;That’s All.&lt;/p&gt;</content><author><name>felipealvesgnu</name></author><category term="IntelliJ" /><category term="Java" /><summary type="html">After spending some time trying to discover why my JSF application worked on eclipse and didn’t on IntelliJ, I found a TomCat setup configuration at Run/Debug Configurations.</summary></entry><entry><title type="html">How to add a Server Runtime Library to a Java EE project using IntelliJ IDEA</title><link href="https://felipealvesgnu.github.io/java/how-to-add-a-server-runtime-library-to-a-java-ee-project-using-intellij-idea/" rel="alternate" type="text/html" title="How to add a Server Runtime Library to a Java EE project using IntelliJ IDEA" /><published>2014-11-13T12:23:49-03:00</published><updated>2014-11-13T12:23:49-03:00</updated><id>https://felipealvesgnu.github.io/java/how-to-add-a-server-runtime-library-to-a-java-ee-project-using-intellij-idea</id><content type="html" xml:base="https://felipealvesgnu.github.io/java/how-to-add-a-server-runtime-library-to-a-java-ee-project-using-intellij-idea/">&lt;p&gt;After I have some difficult to add server libraries to the project, because in IntelliJ is a lit bit different from Eclipse, I’ve decided to post the solution:&lt;/p&gt;
 
 &lt;p&gt;After the project has been opened you will need go in &lt;strong&gt;File&lt;/strong&gt; -&amp;gt; &lt;strong&gt;Project Structure&lt;/strong&gt;.&lt;/p&gt;
 
@@ -258,13 +353,13 @@ IntelliJ will show only the servers that &lt;strong&gt;you have added&lt;/strong
 
 &lt;p&gt;Finally your project will be this way.&lt;/p&gt;
 
-&lt;p&gt;Any problems that you have, ask me.&lt;/p&gt;</content><author><name>felipealvesgnu</name></author><summary type="html">After I have some difficult to add server libraries to the project, because in IntelliJ is a lit bit different from Eclipse, I’ve decided to post the solution:</summary></entry><entry><title type="html">Install oracle client 11 (64 bits) on ubuntu(64 bits) 12</title><link href="https://felipealvesgnu.github.io/java/linux/install-oracleclient-11-64-bits-no-ubuntu64-bits-12-04/" rel="alternate" type="text/html" title="Install oracle client 11 (64 bits) on ubuntu(64 bits) 12" /><published>2012-06-29T18:41:03-04:00</published><updated>2012-06-29T18:41:03-04:00</updated><id>https://felipealvesgnu.github.io/java/linux/install-oracleclient-11-64-bits-no-ubuntu64-bits-12-04</id><content type="html" xml:base="https://felipealvesgnu.github.io/java/linux/install-oracleclient-11-64-bits-no-ubuntu64-bits-12-04/">&lt;p&gt;I have recently faced some difficulties in installing the oracle client in ubuntu and have JBoss ‘see’ the client installation, since it is approved for RedHat distributions, so I would like to share with you the settings that I, with the help of some friends of the work, I was able to make the connection with the UNICAMP - University of Campinas (where the project is located).&lt;/p&gt;
+&lt;p&gt;Any problems that you have, ask me.&lt;/p&gt;</content><author><name>felipealvesgnu</name></author><category term="Java" /><summary type="html">After I have some difficult to add server libraries to the project, because in IntelliJ is a lit bit different from Eclipse, I’ve decided to post the solution:</summary></entry><entry><title type="html">Install oracle client 11 (64 bits) on ubuntu(64 bits) 12</title><link href="https://felipealvesgnu.github.io/java/linux/install-oracleclient-11-64-bits-no-ubuntu64-bits-12-04/" rel="alternate" type="text/html" title="Install oracle client 11 (64 bits) on ubuntu(64 bits) 12" /><published>2012-06-29T18:41:03-04:00</published><updated>2012-06-29T18:41:03-04:00</updated><id>https://felipealvesgnu.github.io/java/linux/install-oracleclient-11-64-bits-no-ubuntu64-bits-12-04</id><content type="html" xml:base="https://felipealvesgnu.github.io/java/linux/install-oracleclient-11-64-bits-no-ubuntu64-bits-12-04/">&lt;p&gt;I have recently faced some difficulties in installing the oracle client in ubuntu and have JBoss ‘see’ the client installation, since it is approved for RedHat distributions, so I would like to share with you the settings that I, with the help of some friends of the work, I was able to make the connection with the UNICAMP - University of Campinas (where the project is located).&lt;/p&gt;
 
 &lt;p&gt;  &lt;/p&gt;
 &lt;h3 id=&quot;installing-the-jdk-and-setting-java_home&quot;&gt;Installing the JDK and setting JAVA_HOME&lt;/h3&gt;
 
 &lt;p&gt;First follow the step-by-step &lt;a href=&quot;https://askubuntu.com/a/89080/68882&quot;&gt;here&lt;/a&gt;.
-After that set the environment variables in &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/profile&lt;/code&gt; file adding the follow lines:&lt;/p&gt;
+After that set the environment variables in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/profile&lt;/code&gt; file adding the follow lines:&lt;/p&gt;
 
 &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;JAVA_HOME&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/usr/lib/jvm/java-6-oracle
 &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$PATH&lt;/span&gt;:&lt;span class=&quot;nv&quot;&gt;$JAVA_HOME&lt;/span&gt;/bin
@@ -334,15 +429,15 @@ After that set the environment variables in &lt;code class=&quot;highlighter-rou
 
 &lt;p class=&quot;notice--info&quot;&gt;&lt;strong&gt;Info:&lt;/strong&gt; the oracle_home is the directory where the installation was performed, check in your environment…&lt;/p&gt;
 
-&lt;p&gt;Add the environment variables in the &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/profile&lt;/code&gt; file by adding the 2 lines below at the end of the file.&lt;/p&gt;
+&lt;p&gt;Add the environment variables in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/profile&lt;/code&gt; file by adding the 2 lines below at the end of the file.&lt;/p&gt;
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;ORACLE_HOME&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/u01/app/oracle/product/11.2.0/client_1
 &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$PATH&lt;/span&gt;:&lt;span class=&quot;nv&quot;&gt;$ORACLE_HOME&lt;/span&gt;/bin
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;  &lt;/p&gt;
 &lt;h3 id=&quot;step-10-publish-libs-to-linux&quot;&gt;Step 10: Publish libs to Linux&lt;/h3&gt;
 
-&lt;p&gt;You should register the oracle 11g lib path in &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/ld.so.conf.d&lt;/code&gt;:
-Create a file called &lt;code class=&quot;highlighter-rouge&quot;&gt;oracle.conf&lt;/code&gt;,  inside &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/ld.so.conf.d&lt;/code&gt; directory, with this content on the first line:&lt;/p&gt;
+&lt;p&gt;You should register the oracle 11g lib path in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/ld.so.conf.d&lt;/code&gt;:
+Create a file called &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;oracle.conf&lt;/code&gt;,  inside &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/ld.so.conf.d&lt;/code&gt; directory, with this content on the first line:&lt;/p&gt;
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/u01/app/oracle/product/11.2.0/client_1/lib
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -356,9 +451,9 @@ Create a file called &lt;code class=&quot;highlighter-rouge&quot;&gt;oracle.conf
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;the terminal may return an alert saying that it could not find the link for a given lib, normal this ‘error’ appears)&lt;/p&gt;
 
-&lt;p&gt;That’s all :rocket: :rocket: :rocket:&lt;/p&gt;</content><author><name>felipealvesgnu</name></author><category term="JBoss" /><category term="oracleclient" /><category term="Ubuntu" /><summary type="html">I have recently faced some difficulties in installing the oracle client in ubuntu and have JBoss ‘see’ the client installation, since it is approved for RedHat distributions, so I would like to share with you the settings that I, with the help of some friends of the work, I was able to make the connection with the UNICAMP - University of Campinas (where the project is located).</summary></entry><entry><title type="html">Serialização e Desserialização de Objetos em Java</title><link href="https://felipealvesgnu.github.io/java/serializacao-e-desserializacao-de-objetos/" rel="alternate" type="text/html" title="Serialização e Desserialização de Objetos em Java" /><published>2010-12-19T00:00:00-03:00</published><updated>2010-12-19T00:00:00-03:00</updated><id>https://felipealvesgnu.github.io/java/serializacao-e-desserializacao-de-objetos</id><content type="html" xml:base="https://felipealvesgnu.github.io/java/serializacao-e-desserializacao-de-objetos/">&lt;p&gt;&lt;strong&gt;Serialização&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;That’s all :rocket: :rocket: :rocket:&lt;/p&gt;</content><author><name>felipealvesgnu</name></author><category term="Java" /><category term="Linux" /><category term="JBoss" /><category term="oracleclient" /><category term="Ubuntu" /><summary type="html">I have recently faced some difficulties in installing the oracle client in ubuntu and have JBoss ‘see’ the client installation, since it is approved for RedHat distributions, so I would like to share with you the settings that I, with the help of some friends of the work, I was able to make the connection with the UNICAMP - University of Campinas (where the project is located).</summary></entry><entry><title type="html">Serialização e Desserialização de Objetos em Java</title><link href="https://felipealvesgnu.github.io/java/serializacao-e-desserializacao-de-objetos/" rel="alternate" type="text/html" title="Serialização e Desserialização de Objetos em Java" /><published>2010-12-19T00:00:00-03:00</published><updated>2010-12-19T00:00:00-03:00</updated><id>https://felipealvesgnu.github.io/java/serializacao-e-desserializacao-de-objetos</id><content type="html" xml:base="https://felipealvesgnu.github.io/java/serializacao-e-desserializacao-de-objetos/">&lt;p&gt;&lt;strong&gt;Serialização&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;Suponhamos que você tivesse um programa, um jogo com uma aventura fictícia que precisasse de mais de uma sessão para ser concluído. Conforme o jogo progride, os personagens ficammais fortes, fracos, inteligentes, etc. E coletam e usam (e perdem armas). Você não quer iniciar do zero sempre que iniciar o jogo ? Portanto precisa de uma maneira de salvar o estado dos personagens e uma maneira de restaurá-lo quando voltar ao jogo.&lt;/p&gt;
+&lt;p&gt;Suponhamos que você tivesse um programa, um jogo com uma aventura fictícia que precisasse de mais de uma sessão para ser concluído. Conforme o jogo progride, os personagens ficam mais fortes, fracos, inteligentes, etc. E coletam e usam (e perdem armas). Você não quer iniciar do zero sempre que iniciar o jogo ? Portanto precisa de uma maneira de salvar o estado dos personagens e uma maneira de restaurá-lo quando voltar ao jogo.&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;Opção
@@ -378,9 +473,9 @@ Create a file called &lt;code class=&quot;highlighter-rouge&quot;&gt;oracle.conf
 &lt;p&gt;Aqui estão as etapas para serializarmos (salvarmos) um objeto.&lt;/p&gt;
 
 &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;//1 - Crie um objeto FileOutputStream&lt;/span&gt;
- &lt;span class=&quot;n&quot;&gt;FileOutputStream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fileStream&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FileOutputStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;MyGame.ser&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+ &lt;span class=&quot;nc&quot;&gt;FileOutputStream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fileStream&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;FileOutputStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;MyGame.ser&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
  &lt;span class=&quot;c1&quot;&gt;//2 - Crie um ObjectOutputStream&lt;/span&gt;
- &lt;span class=&quot;n&quot;&gt;ObjectOutputStream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ObjectOutputStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fileStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+ &lt;span class=&quot;nc&quot;&gt;ObjectOutputStream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ObjectOutputStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fileStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
  &lt;span class=&quot;c1&quot;&gt;//3 - Grave os objetos&lt;/span&gt;
  &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;writeObject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;personagemUm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//Serializa os objetos referenciados por&lt;/span&gt;
  &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;writeObject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;personagemDois&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//personagemUm,personagemDois,personagemTres&lt;/span&gt;
@@ -412,22 +507,22 @@ gravar bytes! Queremos gravar objetos, portanto, precisamos de um stream de &lt;
 &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.io.ObjectOutputStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.io.Serializable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
 
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Box&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Serializable&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Box&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Serializable&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
 
  &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;largura&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
  &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;altura&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
 
- &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;Box&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;myBox&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Box&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+ &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nc&quot;&gt;Box&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;myBox&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Box&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;myBox&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setLargura&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;myBox&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setAltura&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
 
    &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//operação de E/S pode lançar excessões.&lt;/span&gt;
-     &lt;span class=&quot;n&quot;&gt;FileOutputStream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FileOutputStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;foo.ser&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//caso não encontre cria novo arquivo chamado foo.ser&lt;/span&gt;
-     &lt;span class=&quot;n&quot;&gt;ObjectOutputStream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ObjectOutputStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//fs encadeado ao stream de conexão&lt;/span&gt;
+     &lt;span class=&quot;nc&quot;&gt;FileOutputStream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;FileOutputStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;foo.ser&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//caso não encontre cria novo arquivo chamado foo.ser&lt;/span&gt;
+     &lt;span class=&quot;nc&quot;&gt;ObjectOutputStream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ObjectOutputStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//fs encadeado ao stream de conexão&lt;/span&gt;
      &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;writeObject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;myBox&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
      &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;close&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-   &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+   &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
      &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;printStackTrace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
@@ -449,17 +544,17 @@ gravar bytes! Queremos gravar objetos, portanto, precisamos de um stream de &lt;
 &lt;p&gt;Aqui estão as etapas para desserializarmos (abrir) um objeto.&lt;/p&gt;
 
 &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;//1 - Crie um objeto FileInputStream&lt;/span&gt;
- &lt;span class=&quot;n&quot;&gt;FileInputStream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fileStream&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FileInputStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;MyGame.ser&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+ &lt;span class=&quot;nc&quot;&gt;FileInputStream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fileStream&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;FileInputStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;MyGame.ser&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
  &lt;span class=&quot;c1&quot;&gt;//2 - Crie um ObjectInputStream&lt;/span&gt;
- &lt;span class=&quot;n&quot;&gt;ObjectInputStream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ObjectInputStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fileStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+ &lt;span class=&quot;nc&quot;&gt;ObjectInputStream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ObjectInputStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fileStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
  &lt;span class=&quot;c1&quot;&gt;//3 - Leia os objetos&lt;/span&gt;
- &lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;um&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;readObject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
- &lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dois&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;readObject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
- &lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tres&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;readObject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+ &lt;span class=&quot;nc&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;um&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;readObject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+ &lt;span class=&quot;nc&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dois&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;readObject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+ &lt;span class=&quot;nc&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tres&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;readObject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
  &lt;span class=&quot;c1&quot;&gt;//4 - Converta os objetos&lt;/span&gt;
- &lt;span class=&quot;n&quot;&gt;GamePersonagem&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;duende&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;  &lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GamePersonagem&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;um&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
- &lt;span class=&quot;n&quot;&gt;GamePersonagem&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;duende_2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GamePersonagem&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dois&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
- &lt;span class=&quot;n&quot;&gt;GamePersonagem&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;magico&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;  &lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GamePersonagem&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tres&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+ &lt;span class=&quot;nc&quot;&gt;GamePersonagem&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;duende&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;  &lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;GamePersonagem&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;um&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+ &lt;span class=&quot;nc&quot;&gt;GamePersonagem&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;duende_2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;GamePersonagem&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dois&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+ &lt;span class=&quot;nc&quot;&gt;GamePersonagem&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;magico&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;  &lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;GamePersonagem&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tres&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
 
  &lt;span class=&quot;c1&quot;&gt;//5 - Feche ObjectInputStream&lt;/span&gt;
  &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;close&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
@@ -482,7 +577,7 @@ que são reconstituídas com nulo(para referências de objeto) ou com valores pr
 
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;Uma variável de instância com a palavra-chave &lt;code class=&quot;highlighter-rouge&quot;&gt;transient&lt;/code&gt; se quiser que a serialização a ignore.&lt;/p&gt;
+    &lt;p&gt;Uma variável de instância com a palavra-chave &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;transient&lt;/code&gt; se quiser que a serialização a ignore.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Durante a desserialização, a classe de todos os objetos da ramificação deve estar disponível na JVM.&lt;/p&gt;
@@ -491,4 +586,4 @@ que são reconstituídas com nulo(para referências de objeto) ou com valores pr
 
 &lt;p&gt;Referências Bibliográficas&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;SIERRA, Kathy; BATES, Bert - Use a Cabeça Java - Editora Alta Books, Rio de Janeiro, 2010.&lt;/em&gt;&lt;/p&gt;</content><author><name>felipealvesgnu</name></author><summary type="html">Serialização</summary></entry></feed>
+&lt;p&gt;&lt;em&gt;SIERRA, Kathy; BATES, Bert - Use a Cabeça Java - Editora Alta Books, Rio de Janeiro, 2010.&lt;/em&gt;&lt;/p&gt;</content><author><name>felipealvesgnu</name></author><category term="Java" /><summary type="html">Serialização</summary></entry></feed>

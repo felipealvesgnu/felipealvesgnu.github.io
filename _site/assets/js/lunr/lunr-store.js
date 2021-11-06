@@ -1,6 +1,6 @@
 var store = [{
         "title": "Serialização e Desserialização de Objetos em Java",
-        "excerpt":"Serialização Suponhamos que você tivesse um programa, um jogo com uma aventura fictícia que precisasse de mais de uma sessão para ser concluído. Conforme o jogo progride, os personagens ficammais fortes, fracos, inteligentes, etc. E coletam e usam (e perdem armas). Você não quer iniciar do zero sempre que iniciar...","categories": ["Java"],
+        "excerpt":"Serialização Suponhamos que você tivesse um programa, um jogo com uma aventura fictícia que precisasse de mais de uma sessão para ser concluído. Conforme o jogo progride, os personagens ficam mais fortes, fracos, inteligentes, etc. E coletam e usam (e perdem armas). Você não quer iniciar do zero sempre que...","categories": ["Java"],
         "tags": [],
         "url": "https://felipealvesgnu.github.io/java/serializacao-e-desserializacao-de-objetos/",
         "teaser":null},{
@@ -23,4 +23,9 @@ var store = [{
         "excerpt":"Este tutorial tem por objetivo facilitar o entendimento e aplicabilidade da forma como GitFlow funciona, sem enrolação e direto ao ponto: Gitflow é um projeto de fluxo de trabalho do Git que foi popularizado por Vincent Driessen. O fluxo define um modelo de ramificação estrito projetado em torno do lançamento...","categories": ["Git"],
         "tags": [],
         "url": "https://felipealvesgnu.github.io/git/gitflow/",
+        "teaser":null},{
+        "title": "Helm Error",
+        "excerpt":"Erro com Helm Eu tentando a fazer a instalação do chart do NGINX no Helm com o seguinte comando: $ helm install my-ingress ingress-nginx/ingress-nginx me retorna este erro :ambulance: : Error: INSTALLATION FAILED: rendered manifests contain a resource that already exists. Unable to continue with install: IngressClass \"nginx\" in namespace...","categories": ["K8s"],
+        "tags": [],
+        "url": "https://felipealvesgnu.github.io/k8s/helm/",
         "teaser":null}]

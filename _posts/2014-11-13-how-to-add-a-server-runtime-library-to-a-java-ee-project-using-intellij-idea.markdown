@@ -1,5 +1,6 @@
 ---
 author: felipealvesgnu
+comments: true
 date: 2014-11-13 15:23:49+00:00
 slug: how-to-add-a-server-runtime-library-to-a-java-ee-project-using-intellij-idea
 title: How to add a Server Runtime Library to a Java EE project using IntelliJ IDEA

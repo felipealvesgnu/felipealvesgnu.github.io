@@ -104,7 +104,7 @@
 
   </head>
 
-  <body class="layout--single">
+  <body class="layout--splash">
 
     <!--[if lt IE 9]>
 <div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
@@ -134,127 +134,21 @@
     <div class="initial-content">
       
 
-
-
 <div id="main" role="main">
-  
-  <div class="sidebar sticky">
-  
-
-
-<div itemscope itemtype="https://schema.org/Person">
-
-  
-
-  <div class="author__content">
-    
-      <h3 class="author__name" itemprop="name"></h3>
-    
-    
-  </div>
-
-  <div class="author__urls-wrapper">
-    <button class="btn btn--inverse">Follow</button>
-    <ul class="author__urls social-icons">
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      <!--
-  <li>
-    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
-      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
-    </a>
-  </li>
--->
-    </ul>
-  </div>
-</div>
-
-  
-  </div>
-
-
-  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+  <article class="splash" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Install oracle client 11 (64 bits) on ubuntu(64 bits) 12">
     <meta itemprop="description" content="I have recently faced some difficulties in installing the oracle client in ubuntu and have JBoss ‘see’ the client installation, since it is approved for RedHat distributions, so I would like to share with you the settings that I, with the help of some friends of the work, I was able to make the connection with the UNICAMP - University of Campinas (where the project is located).">
     <meta itemprop="datePublished" content="June 29, 2012">
     
 
-    <div class="page__inner-wrap">
-      
-        <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">Install oracle client 11 (64 bits) on ubuntu(64 bits) 12
-</h1>
-          
-            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
-
-
-
-
-  2 minute read
-</p>
-          
-        </header>
-      
-
-      <section class="page__content" itemprop="text">
-        
-        <p>I have recently faced some difficulties in installing the oracle client in ubuntu and have JBoss ‘see’ the client installation, since it is approved for RedHat distributions, so I would like to share with you the settings that I, with the help of some friends of the work, I was able to make the connection with the UNICAMP - University of Campinas (where the project is located).</p>
+    <section class="page__content" itemprop="text">
+      <p>I have recently faced some difficulties in installing the oracle client in ubuntu and have JBoss ‘see’ the client installation, since it is approved for RedHat distributions, so I would like to share with you the settings that I, with the help of some friends of the work, I was able to make the connection with the UNICAMP - University of Campinas (where the project is located).</p>
 
 <p>  </p>
 <h3 id="installing-the-jdk-and-setting-java_home">Installing the JDK and setting JAVA_HOME</h3>
 
 <p>First follow the step-by-step <a href="https://askubuntu.com/a/89080/68882">here</a>.
-After that set the environment variables in <code class="highlighter-rouge">/etc/profile</code> file adding the follow lines:</p>
+After that set the environment variables in <code class="language-plaintext highlighter-rouge">/etc/profile</code> file adding the follow lines:</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">export </span><span class="nv">JAVA_HOME</span><span class="o">=</span>/usr/lib/jvm/java-6-oracle
 <span class="nv">$ </span><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$JAVA_HOME</span>/bin
@@ -324,15 +218,15 @@ After that set the environment variables in <code class="highlighter-rouge">/etc
 
 <p class="notice--info"><strong>Info:</strong> the oracle_home is the directory where the installation was performed, check in your environment…</p>
 
-<p>Add the environment variables in the <code class="highlighter-rouge">/etc/profile</code> file by adding the 2 lines below at the end of the file.</p>
+<p>Add the environment variables in the <code class="language-plaintext highlighter-rouge">/etc/profile</code> file by adding the 2 lines below at the end of the file.</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">export </span><span class="nv">ORACLE_HOME</span><span class="o">=</span>/u01/app/oracle/product/11.2.0/client_1
 <span class="nv">$ </span><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$ORACLE_HOME</span>/bin
 </code></pre></div></div>
 <p>  </p>
 <h3 id="step-10-publish-libs-to-linux">Step 10: Publish libs to Linux</h3>
 
-<p>You should register the oracle 11g lib path in <code class="highlighter-rouge">/etc/ld.so.conf.d</code>:
-Create a file called <code class="highlighter-rouge">oracle.conf</code>,  inside <code class="highlighter-rouge">/etc/ld.so.conf.d</code> directory, with this content on the first line:</p>
+<p>You should register the oracle 11g lib path in <code class="language-plaintext highlighter-rouge">/etc/ld.so.conf.d</code>:
+Create a file called <code class="language-plaintext highlighter-rouge">oracle.conf</code>,  inside <code class="language-plaintext highlighter-rouge">/etc/ld.so.conf.d</code> directory, with this content on the first line:</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/u01/app/oracle/product/11.2.0/client_1/lib
 </code></pre></div></div>
 
@@ -349,221 +243,8 @@ Create a file called <code class="highlighter-rouge">oracle.conf</code>,  inside
 <p>That’s all <img class="emoji" title=":rocket:" alt=":rocket:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f680.png" height="20" width="20"> <img class="emoji" title=":rocket:" alt=":rocket:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f680.png" height="20" width="20"> <img class="emoji" title=":rocket:" alt=":rocket:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f680.png" height="20" width="20"></p>
 
 
-        
-      </section>
-
-      <footer class="page__meta">
-        
-        
-  
-
-
-  
-  
-  
-
-  <p class="page__taxonomy">
-    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
-    <span itemprop="keywords">
-    
-      
-      
-      <a href="/tags/#jboss" class="page__taxonomy-item" rel="tag">JBoss</a><span class="sep">, </span>
-    
-      
-      
-      <a href="/tags/#oracleclient" class="page__taxonomy-item" rel="tag">oracleclient</a><span class="sep">, </span>
-    
-      
-      
-      <a href="/tags/#ubuntu" class="page__taxonomy-item" rel="tag">Ubuntu</a>
-    
-    </span>
-  </p>
-
-
-
-
-  
-
-
-  
-  
-  
-
-  <p class="page__taxonomy">
-    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
-    <span itemprop="keywords">
-    
-      
-      
-      <a href="/categories/#java" class="page__taxonomy-item" rel="tag">Java</a><span class="sep">, </span>
-    
-      
-      
-      <a href="/categories/#linux" class="page__taxonomy-item" rel="tag">Linux</a>
-    
-    </span>
-  </p>
-
-
-        
-          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2012-06-29T18:41:03-04:00">June 29, 2012</time></p>
-        
-      </footer>
-
-      <section class="page__share">
-  
-    <h4 class="page__share-title">Share on</h4>
-  
-
-  <a href="https://twitter.com/intent/tweet?text=Install+oracle+client+11+%2864+bits%29+on+ubuntu%2864+bits%29+12%20https%3A%2F%2Ffelipealvesgnu.github.io%2Fjava%2Flinux%2Finstall-oracleclient-11-64-bits-no-ubuntu64-bits-12-04%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
-
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Ffelipealvesgnu.github.io%2Fjava%2Flinux%2Finstall-oracleclient-11-64-bits-no-ubuntu64-bits-12-04%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
-
-  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Ffelipealvesgnu.github.io%2Fjava%2Flinux%2Finstall-oracleclient-11-64-bits-no-ubuntu64-bits-12-04%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
-</section>
-
-
-      
-  <nav class="pagination">
-    
-      <a href="/java/serializacao-e-desserializacao-de-objetos/" class="pagination--pager" title="Serialização e Desserialização de Objetos em Java
-">Previous</a>
-    
-    
-      <a href="/java/how-to-add-a-server-runtime-library-to-a-java-ee-project-using-intellij-idea/" class="pagination--pager" title="How to add a Server Runtime Library to a Java EE project using IntelliJ IDEA
-">Next</a>
-    
-  </nav>
-
-    </div>
-
-    
+    </section>
   </article>
-
-  
-  
-    <div class="page__related">
-      <h4 class="page__related-title">You may also enjoy</h4>
-      <div class="grid__wrapper">
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/git/gitflow/" rel="permalink">Gitflow
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
-
-
-
-
-  3 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">Este tutorial tem por objetivo facilitar o entendimento e aplicabilidade da forma como GitFlow funciona, sem enrolação e direto ao ponto:
-
-</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/intellij/java/intellij-application-context-configuration/" rel="permalink">IntelliJ - Application context configuration
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
-
-
-
-
-  1 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">After spending some time trying to discover why my JSF application worked on eclipse and didn’t on IntelliJ, I found a TomCat setup configuration at Run/Debu...</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/java/how-to-add-a-server-runtime-library-to-a-java-ee-project-using-intellij-idea/" rel="permalink">How to add a Server Runtime Library to a Java EE project using IntelliJ IDEA
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
-
-
-
-
-  less than 1 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">After I have some difficult to add server libraries to the project, because in IntelliJ is a lit bit different from Eclipse, I’ve decided to post the solutio...</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/java/serializacao-e-desserializacao-de-objetos/" rel="permalink">Serialização e Desserialização de Objetos em Java
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
-
-
-
-
-  3 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">Serialização
-
-</p>
-  </article>
-</div>
-
-        
-      </div>
-    </div>
-  
-  
 </div>
 
     </div>
@@ -605,7 +286,7 @@ Create a file called <code class="highlighter-rouge">oracle.conf</code>,  inside
   </ul>
 </div>
 
-<div class="page__footer-copyright">© 2020 Felipe A. L. Pereira. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">© 2021 Felipe A. L. Pereira. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
 
       </footer>
     </div>
