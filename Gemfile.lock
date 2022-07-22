@@ -101,6 +101,8 @@ GEM
     multipart-post (2.1.1)
     nokogiri (1.12.5-x86_64-darwin)
       racc (~> 1.4)
+    nokogiri (1.12.5-x86_64-linux)
+      racc (~> 1.4)
     octokit (4.21.0)
       faraday (>= 0.9)
       sawyer (~> 0.8.0, >= 0.5.3)
@@ -125,13 +127,14 @@ GEM
       addressable (>= 2.3.5)
       faraday (> 0.8, < 2.0)
     thread_safe (0.3.6)
-    tzinfo (1.2.9)
+    tzinfo (1.2.10)
       thread_safe (~> 0.1)
     webrick (1.7.0)
     zeitwerk (2.5.1)
 
 PLATFORMS
   x86_64-darwin-18
+  x86_64-linux
 
 DEPENDENCIES
   bundler
